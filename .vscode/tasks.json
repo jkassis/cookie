@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build with cargo",
+      "type": "shell",
+      "options": {
+        "cwd": "./server",
+        "env": {
+          "GST_DEBUG": "*:3",
+          "OMP_NUM_THREADS": "4",
+          "RUST_BACKTRACE": "1",
+          "PKG_CONFIG_PATH": "/opt/homebrew/opt/glib/lib/pkgconfig:/opt/homebrew/opt/gstreamer/lib/pkgconfig:$PKG_CONFIG_PATH",
+        }
+      },
+      "command": [
+        "./make.sh"
+      ],
+      "args": [
+        "build_dev",
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$rustc"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "showReuseMessage": false
+      },
+      "isBackground": false
+    }
+  ]
+}

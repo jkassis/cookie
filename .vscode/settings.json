@@ -1,0 +1,12 @@
+{
+  "rust-analyzer.cargo.extraEnv": {
+    "GST_GL_API": "opengl",
+    "GST_DEBUG": "*:3",
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true
+}

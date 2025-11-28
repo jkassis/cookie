@@ -1,0 +1,15 @@
+[env]
+GST_DEBUG = "*:3"
+OMP_NUM_THREADS = "4"
+
+[target.x86_64-unknown-linux-gnu]
+rustflags = [ "-Clink-args=-Wl,-rpath,\\$ORIGIN" ]
+
+[target.aarch64-apple-darwin]
+rustflags = [
+    "-L", "/Users/jkassis/Code/cookie/server/lib/",
+     "-Clink-args=-Wl,-rpath,\\$ORIGIN",
+]
+
+[build]
+target-dir = "server/target"

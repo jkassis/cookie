@@ -1,0 +1,52 @@
+.detail.screen {
+  .name.OO {
+    font-size: 30px;
+  }
+
+  .image.OO {
+    background-origin: content-box;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+
+    &:before {
+      display: block;
+      content: '';
+      padding-top: 100%;
+    }
+  }
+
+  .images.h2 {
+    border: 0px;
+  }
+  .image.editor {
+    border: 1px solid #555;
+  }
+
+  .viewer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .children {
+    width: 100%;
+
+    .list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      column-gap: 5px;
+      row-gap: 5px;
+      width: 100%;
+    }
+
+    .brief {
+      cursor: pointer;
+    }
+  }
+
+  .editor {
+    display: flex;
+    flex-direction: column;
+  }
+}

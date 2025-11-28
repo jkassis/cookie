@@ -1,0 +1,360 @@
+   Compiling glib-sys v0.20.9
+   Compiling gobject-sys v0.20.9
+   Compiling gstreamer-sys v0.23.5
+   Compiling gstreamer-base-sys v0.23.5
+   Compiling gio-sys v0.20.9
+   Compiling gstreamer-video-sys v0.23.5
+   Compiling gstreamer-app-sys v0.23.5
+   Compiling ort-sys v2.0.0-rc.9
+   Compiling katseye v0.1.0 (/Users/jkassis/Code/katseye)
+   Compiling glib v0.20.9
+   Compiling ort v2.0.0-rc.9
+   Compiling gstreamer v0.23.5
+   Compiling gstreamer-base v0.23.5
+   Compiling gstreamer-video v0.23.5
+   Compiling gstreamer-app v0.23.5
+warning: unreachable expression
+   --> src/cam.rs:776:5
+    |
+318 | /     loop {
+319 | |         // Check for GStreamer messages periodically
+320 | |         let now = std::time::Instant::now();
+321 | |         if now.duration_since(last_caps_check) >= caps_check_interval {
+...   |
+771 | |         }
+772 | |     }
+    | |_____- any code following this expression is unreachable
+...
+776 |       Ok(())
+    |       ^^^^^^ unreachable expression
+    |
+    = note: `#[warn(unreachable_code)]` on by default
+
+warning: unused variable: `flamegraph`
+   --> src/main.rs:426:13
+    |
+426 |         let flamegraph = {
+    |             ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_flamegraph`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: field `class_id` is never read
+   --> src/ai.rs:288:9
+    |
+280 | pub struct Detection {
+    |            --------- field in this struct
+...
+288 |     pub class_id: usize,
+    |         ^^^^^^^^
+    |
+    = note: `Detection` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+    = note: `#[warn(dead_code)]` on by default
+
+warning: constant `YOLO_CLASSES` is never used
+   --> src/ai.rs:292:7
+    |
+292 | const YOLO_CLASSES: [&str; 80] = [
+    |       ^^^^^^^^^^^^
+
+warning: field `pipeline` is never read
+ --> src/jpeg.rs:9:5
+  |
+8 | pub struct JpegEncoder {
+  |            ----------- field in this struct
+9 |     pipeline: gstreamer::Pipeline,
+  |     ^^^^^^^^
+
+warning: method `shutdown` is never used
+   --> src/jpeg.rs:118:12
+    |
+14  | impl JpegEncoder {
+    | ---------------- method in this implementation
+...
+118 |     pub fn shutdown(&self) {
+    |            ^^^^^^^^
+
+warning: constant `VAD_ENERGY_THRESHOLD` is never used
+  --> src/mic.rs:28:7
+   |
+28 | const VAD_ENERGY_THRESHOLD: f32 = 0.001; // Energy threshold for voice detection
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `VAD_SPECTRAL_CENTROID_MIN` is never used
+  --> src/mic.rs:29:7
+   |
+29 | const VAD_SPECTRAL_CENTROID_MIN: f32 = 300.0; // Min spectral centroid for speech (Hz)
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `VAD_SPECTRAL_CENTROID_MAX` is never used
+  --> src/mic.rs:30:7
+   |
+30 | const VAD_SPECTRAL_CENTROID_MAX: f32 = 3000.0; // Max spectral centroid for speech (Hz)
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `VAD_SMOOTHING_FACTOR` is never used
+  --> src/mic.rs:31:7
+   |
+31 | const VAD_SMOOTHING_FACTOR: f32 = 0.9; // Smoothing for VAD decisions
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `NOISE_LEARNING_RATE` is never used
+  --> src/mic.rs:34:7
+   |
+34 | const NOISE_LEARNING_RATE: f32 = 0.01; // How fast to adapt noise profile
+   |       ^^^^^^^^^^^^^^^^^^^
+
+warning: constant `NOISE_REDUCTION_FACTOR` is never used
+  --> src/mic.rs:35:7
+   |
+35 | const NOISE_REDUCTION_FACTOR: f32 = 0.7; // How much to reduce noise (0.0-1.0)
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `MIN_GAIN` is never used
+  --> src/mic.rs:36:7
+   |
+36 | const MIN_GAIN: f32 = 0.1; // Minimum gain to prevent over-subtraction
+   |       ^^^^^^^^
+
+warning: constant `HARMONIC_BOOST_FACTOR` is never used
+  --> src/mic.rs:39:7
+   |
+39 | const HARMONIC_BOOST_FACTOR: f32 = 1.3; // Boost factor for harmonic frequencies
+   |       ^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `FUNDAMENTAL_FREQ_MIN` is never used
+  --> src/mic.rs:40:7
+   |
+40 | const FUNDAMENTAL_FREQ_MIN: f32 = 80.0; // Min fundamental frequency (Hz)
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `FUNDAMENTAL_FREQ_MAX` is never used
+  --> src/mic.rs:41:7
+   |
+41 | const FUNDAMENTAL_FREQ_MAX: f32 = 400.0; // Max fundamental frequency (Hz)
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: fields `energy_history`, `is_speech`, and `smoothed_decision` are never read
+  --> src/mic.rs:50:5
+   |
+49 | struct VadState {
+   |        -------- fields in this struct
+50 |     energy_history: Vec<f32>,
+   |     ^^^^^^^^^^^^^^
+51 |     is_speech: bool,
+   |     ^^^^^^^^^
+52 |     smoothed_decision: f32,
+   |     ^^^^^^^^^^^^^^^^^
+   |
+   = note: `VadState` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+warning: fields `noise_profile`, `magnitude_buffer`, `phase_buffer`, and `learning_frames` are never read
+  --> src/mic.rs:67:5
+   |
+66 | struct SpectralState {
+   |        ------------- fields in this struct
+67 |     noise_profile: Vec<f32>,
+   |     ^^^^^^^^^^^^^
+68 |     magnitude_buffer: Vec<f32>,
+   |     ^^^^^^^^^^^^^^^^
+69 |     phase_buffer: Vec<f32>,
+   |     ^^^^^^^^^^^^
+70 |     learning_frames: u32,
+   |     ^^^^^^^^^^^^^^^
+   |
+   = note: `SpectralState` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+warning: fields `prev_fundamental` and `harmonic_buffer` are never read
+  --> src/mic.rs:86:5
+   |
+85 | struct HarmonicState {
+   |        ------------- fields in this struct
+86 |     prev_fundamental: f32,
+   |     ^^^^^^^^^^^^^^^^
+87 |     harmonic_buffer: Vec<f32>,
+   |     ^^^^^^^^^^^^^^^
+   |
+   = note: `HarmonicState` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+warning: function `detect_voice_activity` is never used
+   --> src/mic.rs:100:4
+    |
+100 | fn detect_voice_activity(samples: &[f32], vad_state: &mut VadState, _sample_rate: u32) -> bool {
+    |    ^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `simple_fft` is never used
+   --> src/mic.rs:136:4
+    |
+136 | fn simple_fft(samples: &[f32]) -> (Vec<f32>, Vec<f32>) {
+    |    ^^^^^^^^^^
+
+warning: function `simple_ifft` is never used
+   --> src/mic.rs:164:4
+    |
+164 | fn simple_ifft(real: &[f32], imag: &[f32]) -> Vec<f32> {
+    |    ^^^^^^^^^^^
+
+warning: function `apply_spectral_noise_subtraction` is never used
+   --> src/mic.rs:180:4
+    |
+180 | fn apply_spectral_noise_subtraction(
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `apply_harmonic_enhancement` is never used
+   --> src/mic.rs:251:4
+    |
+251 | fn apply_harmonic_enhancement(
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `create_store` is never used
+  --> src/time_series.rs:91:8
+   |
+91 | pub fn create_store<T: Data + 'static>(
+   |        ^^^^^^^^^^^^
+
+warning: methods `first_timestamp` and `last_timestamp` are never used
+   --> src/time_series.rs:126:8
+    |
+115 | pub trait TimeSeriesStore<T: Data>: Send + Sync {
+    |           --------------- methods in this trait
+...
+126 |     fn first_timestamp(&self) -> Option<u128> {
+    |        ^^^^^^^^^^^^^^^
+...
+131 |     fn last_timestamp(&self) -> Option<u128> {
+    |        ^^^^^^^^^^^^^^
+
+warning: method `mic_stream_del` is never used
+  --> src/view.rs:54:14
+   |
+50 | pub trait ViewManager {
+   |           ----------- method in this trait
+...
+54 |     async fn mic_stream_del(&self, client_id: &str);
+   |              ^^^^^^^^^^^^^^
+
+warning: creating a shared reference to mutable static is discouraged
+   --> src/mic.rs:746:47
+    |
+746 | ...                   DEBUG_COUNTER, f32_data.len(), i16_stats, f32_stats);
+    |                       ^^^^^^^^^^^^^ shared reference to mutable static
+    |
+    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/static-mut-references.html>
+    = note: shared references to mutable statics are dangerous; it's undefined behavior if the static is mutated or if a mutable reference is created for it while the shared reference lives
+    = note: `#[warn(static_mut_refs)]` on by default
+
+warning: creating a shared reference to mutable static is discouraged
+   --> src/mic.rs:781:101
+    |
+781 | ...                   log::error!("Audio broadcast channel full - {} errors", ERROR_COUNT);
+    |                                                                               ^^^^^^^^^^^ shared reference to mutable static
+    |
+    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/static-mut-references.html>
+    = note: shared references to mutable statics are dangerous; it's undefined behavior if the static is mutated or if a mutable reference is created for it while the shared reference lives
+
+warning: creating a shared reference to mutable static is discouraged
+   --> src/mic.rs:871:47
+    |
+871 | ...                   DEBUG_COUNTER, f32_data.len(), sample_stats);
+    |                       ^^^^^^^^^^^^^ shared reference to mutable static
+    |
+    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/static-mut-references.html>
+    = note: shared references to mutable statics are dangerous; it's undefined behavior if the static is mutated or if a mutable reference is created for it while the shared reference lives
+
+warning: creating a shared reference to mutable static is discouraged
+   --> src/mic.rs:891:101
+    |
+891 | ...                   log::error!("Audio broadcast channel full - {} errors", ERROR_COUNT);
+    |                                                                               ^^^^^^^^^^^ shared reference to mutable static
+    |
+    = note: for more information, see <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/static-mut-references.html>
+    = note: shared references to mutable statics are dangerous; it's undefined behavior if the static is mutated or if a mutable reference is created for it while the shared reference lives
+
+warning: `katseye` (bin "katseye") generated 31 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.95s
+     Running `target/debug/katseye`
+Main called, PID: 1263
+PRINT: About to log feature flags
+[2025-09-14T12:30:39Z INFO  katseye] Feature Flags - Video Capture: false, Video Recording: false, Audio Capture: true, Audio Recording: true, Memory-Only Storage: false
+PRINT: Finished logging feature flags
+[2025-09-14T12:30:39Z INFO  katseye] video capture disabled - no camera initialization
+[2025-09-14T12:30:39Z INFO  katseye] starting the mic capture
+[2025-09-14T12:30:39Z INFO  katseye::mic] Starting microphone capture initialization...
+[2025-09-14T12:30:39Z INFO  katseye::mic] Intelligent Audio Features - VAD: false, Spectral Noise Subtraction: false, Harmonic Enhancement: false
+[2025-09-14T12:30:39Z INFO  katseye::mic] Audio devices found, proceeding with microphone setup...
+[2025-09-14T12:30:39Z INFO  katseye::mic] Listing available audio devices...
+[2025-09-14T12:30:39Z INFO  katseye::mic] Input device 0: J’s iPhone Pro 14 Microphone
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 1, min_sample_rate: SampleRate(48000), max_sample_rate: SampleRate(48000), buffer_size: Range { min: 15, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic] Input device 1: Jeremy’s AirPods Max
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 1, min_sample_rate: SampleRate(24000), max_sample_rate: SampleRate(24000), buffer_size: Range { min: 8, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic] Input device 2: Logitech Webcam C925e
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(16000), max_sample_rate: SampleRate(16000), buffer_size: Range { min: 5, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(24000), max_sample_rate: SampleRate(24000), buffer_size: Range { min: 5, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(32000), max_sample_rate: SampleRate(32000), buffer_size: Range { min: 5, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic] Input device 3: BlackHole 2ch
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(8000), max_sample_rate: SampleRate(8000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(16000), max_sample_rate: SampleRate(16000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(44100), max_sample_rate: SampleRate(44100), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(48000), max_sample_rate: SampleRate(48000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(88200), max_sample_rate: SampleRate(88200), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(96000), max_sample_rate: SampleRate(96000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(176400), max_sample_rate: SampleRate(176400), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(192000), max_sample_rate: SampleRate(192000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(352800), max_sample_rate: SampleRate(352800), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(384000), max_sample_rate: SampleRate(384000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(705600), max_sample_rate: SampleRate(705600), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(768000), max_sample_rate: SampleRate(768000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic] Input device 4: MacBook Pro Microphone
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 1, min_sample_rate: SampleRate(44100), max_sample_rate: SampleRate(44100), buffer_size: Range { min: 15, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 1, min_sample_rate: SampleRate(48000), max_sample_rate: SampleRate(48000), buffer_size: Range { min: 15, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 1, min_sample_rate: SampleRate(88200), max_sample_rate: SampleRate(88200), buffer_size: Range { min: 15, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 1, min_sample_rate: SampleRate(96000), max_sample_rate: SampleRate(96000), buffer_size: Range { min: 15, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic] Input device 5: Microsoft Teams Audio
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(48000), max_sample_rate: SampleRate(48000), buffer_size: Range { min: 15, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic] Input device 6: Aggregate Device
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(8000), max_sample_rate: SampleRate(8000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(16000), max_sample_rate: SampleRate(16000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(44100), max_sample_rate: SampleRate(44100), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(48000), max_sample_rate: SampleRate(48000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(88200), max_sample_rate: SampleRate(88200), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(96000), max_sample_rate: SampleRate(96000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(176400), max_sample_rate: SampleRate(176400), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(192000), max_sample_rate: SampleRate(192000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(352800), max_sample_rate: SampleRate(352800), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(384000), max_sample_rate: SampleRate(384000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(705600), max_sample_rate: SampleRate(705600), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic]   - Supported config: SupportedStreamConfigRange { channels: 2, min_sample_rate: SampleRate(768000), max_sample_rate: SampleRate(768000), buffer_size: Range { min: 14, max: 4096 }, sample_format: F32 }
+[2025-09-14T12:30:39Z INFO  katseye::mic] Found default input device: Logitech Webcam C925e
+[2025-09-14T12:30:39Z INFO  katseye::mic] Default input config: channels=2, sample_rate=16000, format=F32
+[2025-09-14T12:30:39Z INFO  katseye::mic] Set global sample rate to: 16000 Hz
+[2025-09-14T12:30:39Z INFO  katseye::mic] Set global channel count to: 2 channels
+[2025-09-14T12:30:39Z INFO  katseye::mic] Final device: Logitech Webcam C925e
+[2025-09-14T12:30:39Z INFO  katseye::mic] Final config - Sample rate: 16000, Channels: 2, Format: F32
+[2025-09-14T12:30:39Z WARN  katseye::mic] USB microphone has 2 channels, but WAV header is set to mono. This may cause audio issues!
+[2025-09-14T12:30:39Z INFO  katseye::mic] Trying sample rate: 16000 Hz, Channels: 2, Buffer Size: Fixed(1024)
+[2025-09-14T12:30:39Z INFO  katseye::mic] Capture started at 1757853000.0
+[2025-09-14T12:30:40Z INFO  katseye::mic] Attempting to build stream with format: F32, sample_rate: 16000, channels: 2, buffer_size: Fixed(1024)
+[2025-09-14T12:30:40Z INFO  katseye::mic] Building F32 input stream for high-end audio device
+[2025-09-14T12:30:40Z INFO  katseye::mic] Successfully created input stream with buffer size: Fixed(1024)
+[2025-09-14T12:30:40Z INFO  katseye] Microphone capture started successfully
+[2025-09-14T12:30:40Z INFO  katseye] Microphone stream is now playing
+[2025-09-14T12:30:40Z INFO  katseye] Microphone stream reference stored to keep it alive
+[2025-09-14T12:30:40Z INFO  katseye] initing the mic_store for audio recording - DISK STORAGE MODE
+[2025-09-14T12:30:40Z INFO  katseye::mic] F32 callback #1: 1024 samples, stats: min=-0.001480, max=0.001663, avg=-0.000040
+[2025-09-14T12:30:40Z INFO  katseye::mic] F32 callback #2: 1024 samples, stats: min=-0.001419, max=0.002151, avg=0.000075
+[2025-09-14T12:30:40Z INFO  katseye::mic] F32 callback #3: 1024 samples, stats: min=-0.001740, max=0.001358, avg=-0.000127
+[2025-09-14T12:30:40Z INFO  katseye::mic] F32 callback #4: 1024 samples, stats: min=-0.001465, max=0.001724, avg=0.000071
+[2025-09-14T12:30:40Z INFO  katseye::mic] F32 callback #5: 1024 samples, stats: min=-0.001694, max=0.002014, avg=0.000055
+Time-series stores initialized with time and size limits!
+[2025-09-14T12:30:41Z INFO  katseye::time_series] Time series listener started
+Server running on http://0.0.0.0:3030
+[2025-09-14T12:30:41Z INFO  katseye] Starting servers with HTTPS support
+Server running on:
+  HTTP:  http://0.0.0.0:3030
+  HTTPS: https://0.0.0.0:3443
+For AudioWorklet support in Chrome, use the HTTPS URL
+[2025-09-14T12:30:41Z INFO  katseye] Starting HTTPS server...
+[2025-09-14T12:30:41Z INFO  katseye] HTTPS server started on https://0.0.0.0:3443
+[2025-09-14T12:30:41Z INFO  tracing::span] Server::run_incoming;
+[2025-09-14T12:30:41Z INFO  warp::server] listening with custom incoming
+[2025-09-14T12:30:41Z INFO  tracing::span] Server::run_incoming;
+[2025-09-14T12:30:41Z INFO  warp::server] listening with custom incoming

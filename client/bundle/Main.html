@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>cookie</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cash/8.1.0/cash.min.js"></script>
+  <script src="https://browser.sentry-cdn.com/9.20.0/bundle.tracing.replay.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/4.4.1/less.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+  <style type="text/css">
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+
+    @keyframes rotation {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(359deg)
+      }
+    }
+
+    #errorScreen {
+      box-sizing: border-box;
+      align-items: center;
+      background-color: red;
+      display: none;
+      flex-direction: column;
+      height: 100vh;
+      padding: 2%;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 100000;
+    }
+
+    #errorHeader {
+      color: white;
+      font-weight: bold;
+      font-size: xx-large;
+    }
+
+    #errorFrame {
+      border-radius: 10px;
+      flex: 1;
+      margin-top: 20px;
+      overflow-x: scroll;
+      overflow-y: scroll;
+      padding: 10px;
+      width: 100%;
+    }
+
+    #errorString {
+      color: white;
+      font-family: monospace;
+      font-size: large;
+      user-select: text;
+      white-space: pre;
+      width: 100%;
+    }
+
+    #errorButton {
+      align-items: center;
+      background-color: darkred;
+      border-radius: 100px;
+      border: 8px darkred;
+      color: white;
+      display: flex;
+      font-size: 20px;
+      font-weight: 800;
+      justify-content: center;
+      margin-top: 20px;
+      min-width: 250px;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+
+<body class='min-h-screen w-screen'>
+  <div id='errorScreen'>
+    <img id="errorLogo"></img>
+    <div id='errorHeader'>Shazaam!</div>
+    <div id='errorFrame'>
+      <div id='errorString'> </div>
+    </div>
+    <div id='errorButton'> <span>Dismiss</span> </div>
+  </div>
+</body>
+
+<script type="module">
+  // make the error screen
+  class ErrorScreen {
+    static printObject(o, indent) {
+      var out = ''
+      if (typeof indent === 'undefined') {
+        indent = 0
+      }
+      var props = Object.getOwnPropertyNames(o)
+      for (var p of props) {
+        var val = o[p]
+        out += new Array(4 * indent + 1).join(' ') + p + ': '
+        if (typeof val === 'object') {
+          if (val instanceof Date) {
+            out += 'Date "' + val.toISOString() + '"'
+          } else {
+            out +=
+              '{\n' +
+              ErrorScreen.printObject(val, indent + 1) +
+              new Array(4 * indent + 1).join(' ') +
+              '}'
+          }
+        } else if (typeof val === 'function') {
+        } else {
+          out += '"' + val + '"'
+        }
+        out += ',\n'
+      }
+      return out
+    }
+
+    init() {
+      this.screen = document.getElementById('errorScreen')
+      this.logo = document.getElementById('errorLogo')
+      this.header = document.getElementById('errorHeader')
+      this.string = document.getElementById('errorString')
+      this.button = document.getElementById('errorButton')
+      this.button.onclick = () => this.stop()
+      return this
+    }
+
+    play(error) {
+      var errorString
+      if (error instanceof Error) {
+        errorString = `${error.toString()}\n\n${error.stack.normalize("NFKD")}`
+        console.log(errorString)
+        if (window.Sentry) window.Sentry.captureException(error)
+        var result = console.log(error)
+
+        // StackTrace.fromError(error).then((stack) => {
+        //   window.client.errorScreen.errorString = `${error.toString()}\n\n${stack.join(
+        //     '\n'
+        //   )}`
+        // })
+      } else if (typeof error === 'object') {
+        errorString = ErrorScreen.printObject(error) || ''
+        if (window.Sentry) window.Sentry.captureMessage(error)
+        console.log(error)
+      } else {
+        errorString = error || "undefined error"
+        if (window.Sentry) window.Sentry.captureMessage(errorString)
+        console.log(errorString)
+      }
+
+      this.string.textContent = errorString
+      this.screen.style.display = 'flex'
+      // this.logo.attr(
+      //   'src',
+      //   this.loader.assetKeyToUrl(`image:${this.loader.conf.THEME.thmLogoImage}`)
+      // )
+    }
+
+    stop() {
+      this.screen.style.display = 'none'
+    }
+  }
+
+  var errorScreen = new ErrorScreen()
+  errorScreen.init()
+
+  window.errorScreenPlay = (error) => errorScreen.play(error)
+  window.errorScreenStop = (error) => errorScreen.stop(error)
+
+  // Kill annoying zoom events... its the best way...
+  document.body.addEventListener('click', function (event) {
+    if (event.target.hasAttribute('download')) return
+    event.preventDefault()
+  })
+  document.body.addEventListener('touch', function (event) {
+    if (event.target.hasAttribute('download')) return
+    event.preventDefault()
+  })
+
+  // Env is injected by the server
+  var env = (window.env = {
+    "RUN_MODE": "{{.RUN_MODE}}",
+    "SENTRY_DSN_CLIENT": "{{.SENTRY_DSN_CLIENT}}",
+    "SERVER_API": "{{.SERVER_API}}",
+  })
+
+
+  // Load the app
+  Promise.all([import(`/Main.js`)]).then(async ([{ makeApp, Loader }]) => {
+    // Loader
+    var loader = window.loader = new Loader()
+
+    if (env.SENTRY_DSN_CLIENT) {
+      Sentry.init({
+        dsn: env.SENTRY_DSN_CLIENT,
+        integrations: [Sentry.browserTracingIntegration(), Sentry.replayIntegration()],
+        tracesSampleRate: 1.0,
+        replaysSessionSampleRate: 0.1,
+        replaysOnErrorSampleRate: 1.0,
+      });
+    }
+
+    if (env.LOGROCKET_PROJECT_ID) {
+      loader.promiseAsset('script-tag:https://cdn.lr-in.com/LogRocket.min.js').then(() => {
+        LogRocket.init(env.LOGROCKET_PROJECT_ID)
+        LogRocket.getSessionURL(sessionURL => {
+          window.Sentry.configureScope(scope => { scope.setExtra("sessionURL", sessionURL) })
+        })
+      })
+    }
+
+    if (!makeApp) throw "Failed to load app. Check server logs."
+
+    // Init
+    console.log("Canvas : Initing Client and Server")
+    var width = Number.parseInt('{{.Width }}')
+    var height = Number.parseInt('{{.Height }}')
+    var app = window.app = makeApp(window.Sentry, loader, width, height)
+    app.init(null, null)
+    app.dobs.each(function (i, elem) {
+      document.body.append(elem)
+    })
+    // app.router.routePrefix = 'tmapp/'
+    await app.play()
+  })
+</script>
+
+</html>

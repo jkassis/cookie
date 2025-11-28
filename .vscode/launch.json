@@ -1,0 +1,52 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Client",
+      "request": "launch",
+      "smartStep": true,
+      "sourceMaps": true,
+      "trace": true,
+      "type": "chrome",
+      "runtimeExecutable": "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary",
+      "url": "https://0.0.0.0:3443",
+      "showAsyncStacks": true,
+      "webRoot": "${workspaceFolder}/dist",
+      "sourceMapPathOverrides": {
+        // "../../../src/*": "${webRoot}/src/*",
+        // "../../../../server/api/*": "${workspaceFolder}/server/api",
+      },
+      "runtimeArgs": [
+        "--disable-web-security",
+        "--no-sandbox",
+        // "--user-data-dir=/tmp/chromium_dev"
+      ]
+      // "preLaunchTask": "tsc: apps/store/src"
+    },
+    {
+      "name": "Server",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/server/target/debug/${workspaceFolderBasename}",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "build with cargo",
+      "postDebugTask": "",
+      "internalConsoleOptions": "neverOpen",
+      "stopOnEntry": false,
+      "sourceLanguages": [
+        "rust"
+      ],
+      "env": {
+        "DEBUG": "1",
+        "DYLD_LIBRARY_PATH": "/opt/homebrew/lib:/Users/jkassis/Code/cookie/server/lib",
+        "GST_DEBUG": "*:3",
+        "OMP_NUM_THREADS": "4",
+        "RUST_BACKTRACE": "1",
+        "RUST_LOG": "debug", // Enable debug logging
+        "ENABLE_HTTPS": "true",
+      },
+      "console": "integratedTerminal"
+    }
+  ]
+}

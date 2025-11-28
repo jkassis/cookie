@@ -1,0 +1,10 @@
+*.ts
+*.js
+.git
+.gitignore
+.DS_Store
+node_modules
+*.log
+*.tmp
+*.swp
+*~

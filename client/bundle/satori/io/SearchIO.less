@@ -1,0 +1,88 @@
+.search.IO {
+  > .pane {
+    display: flex;
+    position: relative;
+    width: auto;
+    z-index: 0;
+
+    .icon {
+      width: 40px;
+      border: 1px solid;
+      background-image: url('@{ASSET_SERVER_CDN_BASEURL}/static/img/search.clear.png');
+      background-size: 75%;
+      background-position: center;
+      border-color: @thmUiColor3;
+      display: inline;
+      z-index: 10;
+      &.submit,
+      &.clear {
+        border-right: 0px;
+      }
+      &.intent {
+        background-color: @thmUiColor2;
+      }
+    }
+
+    .intent.icon {
+      border-radius: 0px 10px 10px 0px;
+    }
+
+    .submit.icon {
+      .clickable;
+
+      align-items: center;
+      background-color: @thmUiColor2;
+      background-image: url('@{ASSET_SERVER_CDN_BASEURL}/static/img/check.white.png');
+      background-size: 75%;
+      display: none;
+      justify-content: center;
+    }
+
+    .clear.icon {
+      .clickable;
+
+      align-items: center;
+      background-color: black;
+      background-image: url('@{ASSET_SERVER_CDN_BASEURL}/static/img/ex.white.png');
+      background-size: 75%;
+      display: none;
+      justify-content: center;
+    }
+
+    .value.text.IO {
+      position: relative;
+      flex: 1;
+      font-size: 30px;
+
+      .field {
+        border-radius: 10px 0px 0px 10px;
+        border-color: @thmUiColor3;
+        border-right: 0px;
+
+        .copy {
+          .margin-x-m;
+
+          text-align: left;
+          color: @thmStdTextClr1;
+
+          &.placeholder {
+            color: @thmStdTextClr2;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .error {
+        align-items: center;
+        background-color: red;
+        border-radius: 10px 0px 0px 10px;
+        color: @thmInvTextClr1;
+        display: flex;
+        font-size: 20px;
+        height: 100%;
+        position: absolute;
+        right: 0px;
+      }
+    }
+  }
+}

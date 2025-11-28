@@ -1,0 +1,43 @@
+# Balena deployment files
+.balena/
+local.yml
+
+# Build artifacts that shouldn't be deployed
+target/
+node_modules/
+*.log
+
+# Large data directories
+timeseries/
+pyenv/
+
+# Development files
+.vscode/
+.DS_Store
+.git/
+.gitignore
+
+# Large ML models that can be downloaded at runtime
+# Commenting out onnx exclusion since we need the models in the container
+# *.onnx
+*.pt
+
+# Documentation and scripts
+doc/
+README.md
+BALENA.md
+deploy-balena.sh
+make.sh
+
+# Environment files
+.env*
+
+# Temporary files
+tmp/
+*.tmp
+*.swp
+*~
+
+# IDE files
+.idea/
+*.iml

@@ -1,0 +1,139 @@
+.brief {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+
+  .img {
+    align-items: center;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+
+    .select.icon {
+      background-image: url('@{ASSET_SERVER_CDN_BASEURL}/static/img/check.png');
+      background-size: contain;
+      display: none;
+      height: 40px;
+      left: 0px;
+      position: absolute;
+      top: 0px;
+      width: 40px;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: top;
+
+    .description {
+      flex: 1;
+    }
+
+    .details {
+      display: block;
+      flex: 1;
+      max-width: 100%;
+      position: relative;
+      font-size: 24px;
+
+      .subtitle {
+        color: @thmStdTextClr2;
+        display: none;
+        flex: 1;
+        font-size: 15px;
+        font-weight: 400;
+        text-align: left;
+      }
+
+      .title {
+        color: @thmStdTextClr1;
+        display: block;
+        flex: 1;
+        font-weight: 600;
+        text-align: left;
+      }
+    }
+  }
+
+  // @media @fourk {
+  //   .brief .twentyWide;
+  // }
+
+  // @media @laptopl {
+  //   .brief .twentyFiveWide;
+  // }
+
+  // @media @laptop {
+  //   .brief .thirtyThreeWide;
+  // }
+
+  // @media @tablet {
+  //   .brief .fiftyWide;
+  // }
+
+  // @media @mobilel {
+  //   .brief .oneHundredWide;
+  // }
+
+  // @media @mobilem {
+  //   .brief .oneHundredWide;
+  // }
+
+  // @media @mobiles {
+  //   .brief .oneHundredWide;
+  // }
+
+  .editor {
+    width: 100%;
+  }
+}
+
+.horizontal.brief {
+  flex-direction: row;
+
+  .img {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+
+    &:before {
+      display: block;
+      content: '';
+      padding-top: 100%;
+    }
+  }
+}
+
+.vertical.brief {
+  align-items: center;
+  flex-direction: column;
+
+  .img {
+    display: block;
+    width: 100%;
+
+    &:before {
+      display: block;
+      content: '';
+      padding-top: 100%;
+    }
+  }
+
+  .info {
+    .subtitle,
+    .details .title {
+      text-align: center;
+    }
+  }
+}

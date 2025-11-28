@@ -1,0 +1,71 @@
+.check.IO {
+  display: grid;
+  grid-template:
+    'a' auto
+    'b' auto
+    'c' auto
+    / auto;
+  row-gap: 5px;
+  align-items: center;
+  justify-items: center;
+  touch-action: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.horizontal {
+    grid-template:
+      'a b' auto
+      'c c' auto
+      / min-content auto;
+    row-gap: unset;
+    column-gap: 5px;
+
+    .label {
+      justify-self: left;
+    }
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .field {
+    grid-area: a;
+    align-items: center;
+    background-color: #ffc;
+    border: 1px solid DarkSlateGrey;
+    cursor: pointer;
+    display: table;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    &:hover,
+    &:focus-within {
+      box-shadow: 0 0 10px 3px @thmUiColor1;
+      outline: none;
+    }
+
+    .copy {
+      color: green;
+      display: table-cell;
+      font-weight: bold;
+      outline: 0px solid transparent;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+
+  .label {
+    grid-area: b;
+    display: none;
+  }
+
+  .error {
+    grid-area: c;
+  }
+}
