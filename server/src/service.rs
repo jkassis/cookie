@@ -1,16 +1,14 @@
 use axum::http::{HeaderName, HeaderValue, Request};
 use axum::{
   body::Body,
-  extract::{Path, State},
+  extract::Path,
   http::{header, HeaderMap, Method, StatusCode},
   middleware,
   response::{IntoResponse, Response},
   routing::get,
   Router,
 };
-use base64::{engine::general_purpose::STANDARD, Engine};
 use std::sync::Arc;
-use tower::ServiceBuilder;
 use tower_http::services::ServeDir;
 
 // Custom rejection for unauthorized
@@ -27,22 +25,6 @@ impl Service {
   }
 
   pub fn routes(self: Arc<Self>) -> Router {
-    // --- auth ---
-    let app_mode =
-      std::env::var("APP_MODE").unwrap_or_else(|_| "dev".to_string());
-    let require_auth = app_mode == "prod";
-    log::info!(
-      "APP_MODE: {}, Basic Auth: {}",
-      app_mode,
-      if require_auth { "ENABLED" } else { "DISABLED" }
-    );
-    // Use tower-http's ServeDir for assets
-
-    let admin_user =
-      std::env::var("ADMIN_USER").unwrap_or_else(|_| "admin".to_string());
-    let admin_pass =
-      std::env::var("ADMIN_PASS").unwrap_or_else(|_| "password".to_string());
-
     // build router
     let _service = self.clone();
     let router = Router::new()
@@ -55,18 +37,7 @@ impl Service {
     // tower-http versions.
     let cors_layer = middleware::from_fn(cors_middleware);
 
-    if require_auth {
-      router.layer(
-        ServiceBuilder::new()
-          .layer(middleware::from_fn_with_state(
-            (admin_user, admin_pass),
-            basic_auth_middleware,
-          ))
-          .layer(cors_layer.clone()),
-      )
-    } else {
-      router.layer(cors_layer)
-    }
+    router.layer(cors_layer)
   }
 }
 
@@ -117,38 +88,6 @@ async fn spa_fallback_handler() -> impl IntoResponse {
   let mut headers = HeaderMap::new();
   headers.insert(header::CONTENT_TYPE, "text/html".parse().unwrap());
   (headers, content)
-}
-
-// Basic auth middleware for Axum
-async fn basic_auth_middleware(
-  State((admin_user, admin_pass)): State<(String, String)>,
-  headers: HeaderMap,
-  req: axum::http::Request<axum::body::Body>,
-  next: axum::middleware::Next,
-) -> Result<Response, StatusCode> {
-  if let Some(auth_header) = headers.get(header::AUTHORIZATION) {
-    if let Ok(auth_str) = auth_header.to_str() {
-      if let Some(basic) = auth_str.strip_prefix("Basic ") {
-        if let Ok(decoded) = STANDARD.decode(basic) {
-          if let Ok(cred) = String::from_utf8(decoded) {
-            let mut parts = cred.splitn(2, ':');
-            if let (Some(user), Some(pass)) = (parts.next(), parts.next()) {
-              if user == admin_user && pass == admin_pass {
-                return Ok(next.run(req).await);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  let resp = Response::builder()
-    .status(StatusCode::UNAUTHORIZED)
-    .header("WWW-Authenticate", "Basic realm=admin")
-    .body(Body::from("Unauthorized"))
-    .unwrap();
-  Ok(resp)
 }
 
 // Simple CORS middleware: mirrors Origin and sets necessary CORS headers.
