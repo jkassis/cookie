@@ -47,6 +47,10 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certifi
 # Copy the binary produced in the builder stage
 COPY --from=builder /usr/src/app/target/release/cookie /usr/local/bin/cookie
 
+# Copy server configuration into the runtime image
+COPY server/conf/ /etc/app/conf/
+ENV CERT_DIR "/etc/app/conf/tls"
+
 # Copy static assets
 COPY client/bundle/ /usr/local/bin/client/bundle/
 
