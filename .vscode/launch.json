@@ -44,7 +44,7 @@
         "OMP_NUM_THREADS": "4",
         "RUST_BACKTRACE": "1",
         "RUST_LOG": "debug", // Enable debug logging
-        "ENABLE_HTTPS": "true",
+        "ENABLE_HTTPS": "false",
       },
       "console": "integratedTerminal"
     }
