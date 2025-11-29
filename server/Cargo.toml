@@ -23,6 +23,9 @@ axum = "0.8.7"
 axum-server = { version = "0.7.3", features = ["tls-rustls"] }
 # Ensure rustls uses a single provider (aws-lc) to match other workspace deps
 rustls = { version = "0.23", default-features = false, features = ["aws-lc-rs", "std"] }
+rustls-pemfile = "1.0"
+hyper = { version = "1.5", features = ["http2", "server"] }
+hyper-util = { version = "0.1", features = ["tokio", "server", "server-auto"] }
 webpki-roots = "0.22"
 tower = "0.5.2"
 tower-http = { version = "0.6.6", features = ["cors", "fs"] }
