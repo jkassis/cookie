@@ -1,6 +1,23 @@
 // Copyright © 2018 by Jeremy Kassis. All Rights Reserved.
 import { Cash } from 'cash-dom'
 import { Donut, DonutProps, DonutOptions, html } from './satori/Donut.js'
+import { AddCSS } from './satori/Loader.js'
+
+AddCSS("RecipeFooter", `
+  .recipe-footer-container {
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(6, 78, 59, 0.1);
+    padding-top: 0.75rem;
+  }
+
+  .recipe-footer-message {
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: rgba(6, 78, 59, 0.7);
+    text-transform: uppercase;
+  }
+`)
 
 export class RecipeFooter extends Donut {
   declare public a: {
@@ -13,8 +30,8 @@ export class RecipeFooter extends Donut {
     template = html`
     <div>
       <!-- Message -->
-      <div class="recipeFooter mt-6 border-t border-emerald-900/10 pt-3">
-        <p class="text-center text-[0.7rem] tracking-[0.25em] text-emerald-900/70 uppercase">
+      <div class="recipe-footer-container">
+        <p class="recipe-footer-message">
           A Fresh Take on Coastal Living
         </p>
       </div>
