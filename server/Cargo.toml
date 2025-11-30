@@ -22,7 +22,8 @@ tokio-stream = { version = "0.1.17", features = [ "net" ] }
 axum = "0.8.7"
 axum-server = { version = "0.7.3", features = ["tls-rustls"] }
 # Ensure rustls uses a single provider (aws-lc) to match other workspace deps
-rustls = { version = "0.23", default-features = false, features = ["aws-lc-rs", "std"] }
+# Enable both TLS 1.2 and TLS 1.3 for compatibility
+rustls = { version = "0.23", default-features = false, features = ["aws-lc-rs", "std", "tls12"] }
 rustls-pemfile = "1.0"
 hyper = { version = "1.5", features = ["http2", "server"] }
 hyper-util = { version = "0.1", features = ["tokio", "server", "server-auto"] }
