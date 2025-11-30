@@ -53,6 +53,8 @@ ENV CERT_DIR "/etc/app/conf/tls"
 
 # Copy static assets
 COPY client/bundle/ /usr/local/bin/client/bundle/
+COPY client/assets/ /usr/local/bin/client/assets/
+ENV ASSETS_DIR "/usr/local/bin/client/assets"
 
 # Runtime working directory
 WORKDIR /usr/local/bin

@@ -27,8 +27,13 @@ impl Service {
   pub fn routes(self: Arc<Self>) -> Router {
     // build router
     let _service = self.clone();
+
+    // Get assets directory from env var, default to "client/assets"
+    let assets_dir = std::env::var("ASSETS_DIR")
+      .unwrap_or_else(|_| "client/assets".to_string());
+
     let router = Router::new()
-      .nest_service("/assets", ServeDir::new("client/assets"))
+      .nest_service("/assets", ServeDir::new(assets_dir))
       .route("/{file}", get(static_file_handler))
       .fallback(spa_fallback_handler);
 
