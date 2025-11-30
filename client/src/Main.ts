@@ -12,8 +12,7 @@ export function makeApp(sentry: typeof Sentry, loader: Loader): App {
 }
 
 import './ErrorHandler.js'
-import cash from 'cash-dom'
-import { RecipeE2EScreen } from './RecipeE2EScreen.js'
+import { CreationE2EScreen } from './CreationE2EScreen.js'
 import { AlertPopup, AlertResponse } from './satori/AlertPopup.js'
 import { App as Base } from './satori/App.js'
 import { Cash } from 'cash-dom'
@@ -21,22 +20,25 @@ import { DonutFactory } from './satori/DonutFactory.js'
 import { DonutProps, DonutOptions, html } from './satori/Donut.js'
 import { RedirectRoute } from './satori/Router.js'
 import { ScreenRoute } from './satori/Screen.js'
+import { Creation } from './Schema.js'
+
+
 
 
 class RootRedirectRoute extends RedirectRoute {
   public resolve(a: object, url: string): string {
-    return RecipeE2EScreen.URL({})
+    return CreationE2EScreen.URL({ id: 'paloma' })
   }
 
   public titleGet(): string {
-    return "Home"
+    return "Paloma"
   }
 }
 
 export class App extends Base {
   // --- Properties ---
   public clientId: string = ''
-  public recipeE2EScreen!: RecipeE2EScreen
+  public creationE2EScreen!: CreationE2EScreen
 
   // --- Lifecycle ---
   constructor() {
@@ -53,7 +55,7 @@ export class App extends Base {
   <div class='scrimDob fixed hidden stacking top-0 left-0 z-30 w-screen h-screen bg-white dark:bg-black'></div>
 
   <!-- do sort these -->
-  <div style='display: none' class='recipeE2EScreen'></div>
+  <div style='display: none' class='creationE2EScreen'></div>
 </div>`
 
     super.init(template, {
@@ -61,16 +63,15 @@ export class App extends Base {
       blurAllInput: '.blurAllInput',
       scrimDob: '.scrimDob',
 
-      recipeE2EScreen: ['.recipeE2EScreen', RecipeE2EScreen],
+      creationE2EScreen: ['.creationE2EScreen', CreationE2EScreen],
     }, options)
 
 
     this.clientId = crypto.randomUUID()
     this.router.routeAdd('', [], new RootRedirectRoute(this.router, this.conf))
-    this.router.routeAdd('recipeE2E', [], new ScreenRoute(this, this.recipeE2EScreen))
+    this.router.routeAdd('creation-e2e', [], new ScreenRoute(this, this.creationE2EScreen))
 
     return this.dobs
-
   }
 
   play() {

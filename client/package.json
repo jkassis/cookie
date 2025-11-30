@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "TypeScript frontend for cookie",
   "scripts": {
-    "assets.bundle": "mkdir -p bundle && rsync -avm --exclude-from=.bundleignore src/ bundle/",
+    "assets.bundle": "mkdir -p bundle && rsync -avm --exclude-from=.bundleignore src/ bundle/ && cp src/Main.html bundle/",
     "assets.bundle.watch": "chokidar 'src/**/*' -i '**/*.ts' -i '**/*.js' -c \"yarn assets.bundle\"",
     "bundle": "yarn run ts.build && yarn run ts.bundle && yarn run assets.bundle",
     "bundle.watch": "concurrently \"yarn ts.bundle.watch\" \"yarn assets.bundle.watch\"",

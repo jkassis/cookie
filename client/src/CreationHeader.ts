@@ -1,17 +1,17 @@
 // Copyright © 2018 by Jeremy Kassis. All Rights Reserved.
 import { Cash } from 'cash-dom'
-import { Donut, DonutProps, DonutOptions, html } from './satori/Donut.js'
+import { Donut, DonutProps, DonutOptions, html, css } from './satori/Donut.js'
 import { AddCSS } from './satori/Loader.js'
 
-AddCSS("RecipeHeader", `
-  .recipe-header-container {
+AddCSS("MakeHeader", css`
+  .make-header-container {
     position: relative;
     margin: 0.5rem;
     text-align: center;
     padding: 0.5rem;
   }
 
-  .recipe-header-corner-tl {
+  .make-header-corner-tl {
     position: absolute;
     top: 0;
     left: 0;
@@ -21,7 +21,7 @@ AddCSS("RecipeHeader", `
     border-left: 2px solid rgba(6, 78, 59, 0.4);
   }
 
-  .recipe-header-corner-tr {
+  .make-header-corner-tr {
     position: absolute;
     top: 0;
     right: 0;
@@ -31,7 +31,7 @@ AddCSS("RecipeHeader", `
     border-right: 2px solid rgba(6, 78, 59, 0.4);
   }
 
-  .recipe-header-corner-bl {
+  .make-header-corner-bl {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -41,7 +41,7 @@ AddCSS("RecipeHeader", `
     border-left: 2px solid rgba(6, 78, 59, 0.4);
   }
 
-  .recipe-header-corner-br {
+  .make-header-corner-br {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -51,7 +51,7 @@ AddCSS("RecipeHeader", `
     border-right: 2px solid rgba(6, 78, 59, 0.4);
   }
 
-  .recipe-header-title {
+  .make-header-title {
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -59,7 +59,7 @@ AddCSS("RecipeHeader", `
     text-transform: uppercase;
   }
 
-  .recipe-header-subtitle {
+  .make-header-subtitle {
     margin-top: 0.25rem;
     font-size: 0.7rem;
     letter-spacing: 0.25em;
@@ -68,17 +68,17 @@ AddCSS("RecipeHeader", `
   }
 `)
 
-export class RecipeHeader extends Donut {
+export class MakeHeader extends Donut {
   declare public a: {}
 
   public init(template: string, props: DonutProps, options: DonutOptions): Cash {
     template = html`
-  <div class="recipe-header-container">
+  <div class="make-header-container">
     <!-- Corner decorations -->
-    <div class="recipe-header-corner-tl"></div>
-    <div class="recipe-header-corner-tr"></div>
-    <div class="recipe-header-corner-bl"></div>
-    <div class="recipe-header-corner-br"></div>
+    <div class="make-header-corner-tl"></div>
+    <div class="make-header-corner-tr"></div>
+    <div class="make-header-corner-bl"></div>
+    <div class="make-header-corner-br"></div>
 
     <!-- Side accent marks -->
     <!--
@@ -86,10 +86,10 @@ export class RecipeHeader extends Donut {
       <div class="absolute top-1/2 right-0 w-2 h-px bg-emerald-900/40 -translate-y-1/2"></div>
     -->
 
-    <p class="recipe-header-title">
+    <p class="make-header-title">
       FarmGoods Market
     </p>
-    <p class="recipe-header-subtitle">
+    <p class="make-header-subtitle">
       - Mocktail Series -
     </p>
   </div>`

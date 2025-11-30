@@ -786,7 +786,7 @@ var require_cash = __commonJS({
         }
         return !isVariable && !numericProps[prop] && isNumeric(value) ? "".concat(value, "px") : value;
       }
-      function css2(prop, value) {
+      function css3(prop, value) {
         if (isString(prop)) {
           var isVariable_1 = isCSSVariable(prop);
           prop = getPrefixedProp(prop, isVariable_1);
@@ -811,7 +811,7 @@ var require_cash = __commonJS({
         return this;
       }
       ;
-      fn.css = css2;
+      fn.css = css3;
       function attempt(fn2, arg) {
         try {
           return fn2(arg);
@@ -1910,6 +1910,14 @@ function html(strings, ...args) {
   });
   return out;
 }
+function css(strings, ...args) {
+  var out = "";
+  strings.forEach((s, i) => {
+    out += s;
+    if (i < args.length) out += args[i];
+  });
+  return out;
+}
 var Donut = class {
   selector;
   a;
@@ -2142,8 +2150,8 @@ var Donut = class {
   }
 };
 
-// src/RecipeActions.ts
-var RecipeActions = class extends Donut {
+// src/CreationActions.ts
+var MakeActions = class extends Donut {
   shopListAddButton;
   shareButton;
   saveButton;
@@ -2175,15 +2183,15 @@ var RecipeActions = class extends Donut {
   }
 };
 
-// src/RecipeFooter.ts
-AddCSS("RecipeFooter", `
-  .recipe-footer-container {
+// src/CreationFooter.ts
+AddCSS("MakeFooter", css`
+  .make-footer-container {
     margin-top: 1.5rem;
     border-top: 1px solid rgba(6, 78, 59, 0.1);
     padding-top: 0.75rem;
   }
 
-  .recipe-footer-message {
+  .make-footer-message {
     text-align: center;
     font-size: 0.7rem;
     letter-spacing: 0.25em;
@@ -2191,13 +2199,13 @@ AddCSS("RecipeFooter", `
     text-transform: uppercase;
   }
 `);
-var RecipeFooter = class extends Donut {
+var MakeFooter = class extends Donut {
   init(template, props, options) {
     template = html`
     <div>
       <!-- Message -->
-      <div class="recipe-footer-container">
-        <p class="recipe-footer-message">
+      <div class="make-footer-container">
+        <p class="make-footer-message">
           A Fresh Take on Coastal Living
         </p>
       </div>
@@ -2207,16 +2215,16 @@ var RecipeFooter = class extends Donut {
   }
 };
 
-// src/RecipeHeader.ts
-AddCSS("RecipeHeader", `
-  .recipe-header-container {
+// src/CreationHeader.ts
+AddCSS("MakeHeader", css`
+  .make-header-container {
     position: relative;
     margin: 0.5rem;
     text-align: center;
     padding: 0.5rem;
   }
 
-  .recipe-header-corner-tl {
+  .make-header-corner-tl {
     position: absolute;
     top: 0;
     left: 0;
@@ -2226,7 +2234,7 @@ AddCSS("RecipeHeader", `
     border-left: 2px solid rgba(6, 78, 59, 0.4);
   }
 
-  .recipe-header-corner-tr {
+  .make-header-corner-tr {
     position: absolute;
     top: 0;
     right: 0;
@@ -2236,7 +2244,7 @@ AddCSS("RecipeHeader", `
     border-right: 2px solid rgba(6, 78, 59, 0.4);
   }
 
-  .recipe-header-corner-bl {
+  .make-header-corner-bl {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -2246,7 +2254,7 @@ AddCSS("RecipeHeader", `
     border-left: 2px solid rgba(6, 78, 59, 0.4);
   }
 
-  .recipe-header-corner-br {
+  .make-header-corner-br {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -2256,7 +2264,7 @@ AddCSS("RecipeHeader", `
     border-right: 2px solid rgba(6, 78, 59, 0.4);
   }
 
-  .recipe-header-title {
+  .make-header-title {
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -2264,7 +2272,7 @@ AddCSS("RecipeHeader", `
     text-transform: uppercase;
   }
 
-  .recipe-header-subtitle {
+  .make-header-subtitle {
     margin-top: 0.25rem;
     font-size: 0.7rem;
     letter-spacing: 0.25em;
@@ -2272,15 +2280,15 @@ AddCSS("RecipeHeader", `
     text-transform: uppercase;
   }
 `);
-var RecipeHeader = class extends Donut {
+var MakeHeader = class extends Donut {
   init(template, props, options) {
     template = html`
-  <div class="recipe-header-container">
+  <div class="make-header-container">
     <!-- Corner decorations -->
-    <div class="recipe-header-corner-tl"></div>
-    <div class="recipe-header-corner-tr"></div>
-    <div class="recipe-header-corner-bl"></div>
-    <div class="recipe-header-corner-br"></div>
+    <div class="make-header-corner-tl"></div>
+    <div class="make-header-corner-tr"></div>
+    <div class="make-header-corner-bl"></div>
+    <div class="make-header-corner-br"></div>
 
     <!-- Side accent marks -->
     <!--
@@ -2288,10 +2296,10 @@ var RecipeHeader = class extends Donut {
       <div class="absolute top-1/2 right-0 w-2 h-px bg-emerald-900/40 -translate-y-1/2"></div>
     -->
 
-    <p class="recipe-header-title">
+    <p class="make-header-title">
       FarmGoods Market
     </p>
-    <p class="recipe-header-subtitle">
+    <p class="make-header-subtitle">
       - Mocktail Series -
     </p>
   </div>`;
@@ -2359,7 +2367,7 @@ var Eventful = class {
 };
 
 // src/satori/Style.ts
-function css(strings, ...args) {
+function css2(strings, ...args) {
   return strings[0];
 }
 function StyleAdd(t, s) {
@@ -2370,7 +2378,7 @@ function StyleAdd(t, s) {
 }
 
 // src/satori/Router.ts
-StyleAdd("Router", css`
+StyleAdd("Router", css2`
 /* for Firefox */
 .killscrollbar {
       scrollbar-width: none;
@@ -2959,9 +2967,42 @@ var Screen = class extends Donut {
   }
 };
 
-// src/RecipeE2EScreen.ts
-AddCSS("RecipeE2EScreen", `
-  .recipe-container {
+// src/DAO.ts
+var creations = {
+  "paloma": {
+    id: "paloma",
+    heroImg: "assets/paloma-fresca/hero.png",
+    title: "Paloma Fresca",
+    desc: "A fresh citrus-forward coastal mocktail inspired by long afternoons on the Malibu pier.",
+    bom: [
+      { title: "4 oz fresh grapefruit juice", link: "" },
+      { title: "1 oz lime juice", link: "" },
+      { title: "2 oz sparkling water", link: "" },
+      { title: "1 tsp agave syrup", link: "" },
+      { title: "Sea-salt rim", link: "" },
+      { title: "Rosemary sprig or grapefruit wedge (garnish)", link: "" }
+    ],
+    steps: [
+      "Run a lime wedge around the rim and dip the glass in sea salt.",
+      "Fill the glass with ice.",
+      "Add grapefruit juice, lime juice, and agave syrup.",
+      "Stir gently to combine.",
+      "Top with sparkling water.",
+      "Garnish with rosemary sprig or grapefruit slice."
+    ],
+    notes: "Use pink grapefruit for a softer, sweeter profile. Swap sparkling water for tonic if you like more bite, or try smoked sea salt on the rim for an extra coastal twist."
+  }
+};
+var DAO = class {
+  CreationByID(id) {
+    return creations[id];
+  }
+};
+var dao = new DAO();
+
+// src/CreationE2EScreen.ts
+AddCSS("CreationE2EScreen", css`
+  .creation-e2e-container {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -2974,18 +3015,18 @@ AddCSS("RecipeE2EScreen", `
     padding-bottom: 5rem;
   }
 
-  .recipe-hero {
+  .creation-e2e-hero {
     width: 100%;
     aspect-ratio: 4/3;
   }
 
-  .recipe-hero img {
+  .creation-e2e-hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .recipe-content {
+  .creation-e2e-content {
     padding: 1.25rem 1.5rem 1.5rem;
     max-width: 42rem;
     margin-left: auto;
@@ -2993,12 +3034,12 @@ AddCSS("RecipeE2EScreen", `
     flex: 1;
   }
 
-  .recipe-title-section {
+  .creation-e2e-title-section {
     margin-bottom: 1.5rem;
     text-align: center;
   }
 
-  .recipe-title {
+  .creation-e2e-title {
     font-size: 1.875rem;
     line-height: 2.25rem;
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -3006,7 +3047,7 @@ AddCSS("RecipeE2EScreen", `
     color: rgb(6, 78, 59);
   }
 
-  .recipe-description {
+  .creation-e2e-desc {
     margin-top: 0.5rem;
     font-size: 0.875rem;
     line-height: 1.625;
@@ -3014,7 +3055,7 @@ AddCSS("RecipeE2EScreen", `
     font-style: italic;
   }
 
-  .recipe-ingredients-box {
+  .creation-e2e-bom-box {
     padding: 1rem;
     margin-bottom: 1.25rem;
     background-color: #F7F4EA;
@@ -3023,7 +3064,7 @@ AddCSS("RecipeE2EScreen", `
     border: 1px solid #EAE6E4;
   }
 
-  .recipe-section-title {
+  .creation-e2e-section-title {
     font-size: 1.5rem;
     line-height: 2rem;
     color: rgb(30, 41, 59);
@@ -3031,26 +3072,26 @@ AddCSS("RecipeE2EScreen", `
     margin-bottom: 1rem;
   }
 
-  .recipe-ingredients-list {
+  .creation-e2e-bom {
     font-size: 0.875rem;
     line-height: 1.625;
     color: rgb(30, 41, 59);
   }
 
-  .recipe-ingredients-list ul {
+  .creation-e2e-bom ul {
     list-style-type: disc;
     list-style-position: inside;
   }
 
-  .recipe-ingredients-list ul li {
+  .creation-e2e-bom ul li {
     margin-bottom: 0.25rem;
   }
 
-  .recipe-directions {
+  .creation-e2e-steps{
     margin-bottom: 1.25rem;
   }
 
-  .recipe-directions ol {
+  .creation-e2e-steps ol {
     margin-top: 0.75rem;
     list-style-type: decimal;
     list-style-position: inside;
@@ -3059,103 +3100,119 @@ AddCSS("RecipeE2EScreen", `
     color: rgb(30, 41, 59);
   }
 
-  .recipe-directions ol li {
+  .creation-e2e-steps ol li {
     margin-bottom: 0.25rem;
   }
 
-  .recipe-notes {
+  .creation-e2e-notes {
     margin-bottom: 1.5rem;
   }
 
-  .recipe-notes p {
+  .creation-e2e-notes p {
     margin-top: 0.75rem;
     font-size: 0.75rem;
     line-height: 1.625;
     color: rgb(51, 65, 85);
   }
 
-  .recipe-actions-fixed {
+  .creation-e2e-actions-fixed {
     position: fixed;
     bottom: 0;
   }
 `);
-var RecipeE2EScreen = class extends Screen {
-  recipeFooter;
+var CreationE2EScreen = class extends Screen {
   static URL(a) {
-    return `recipeE2E?${Router.aToURLParams(a)}`;
+    return `creation-e2e?${Router.aToURLParams(a)}`;
   }
+  creation;
+  title;
+  desc;
+  heroImg;
+  bom;
+  steps;
+  notes;
+  makeFooter;
   init(template, props, options) {
     var template = html`
-    <div class="recipe-container">
-      <div class="recipeHeader"></div>
+    <div class="creation-e2e-container">
+      <div class="makeHeader"></div>
 
       <!-- Edge-to-edge hero image -->
-      <div class="recipe-hero">
-        <img src="assets/paloma-fresca/hero.png" alt="Paloma Fresca mocktail with grapefruit and rosemary" />
+      <div class="creation-e2e-hero">
+        <img class="creation-e2e-hero-img" src="" alt="" />
       </div>
 
       <!-- Content -->
-      <div class="recipe-content">
+      <div class="creation-e2e-content">
 
-        <!-- Title + Description -->
-        <div class="recipe-title-section">
-          <h1 class="recipe-title">
-            Paloma Fresca
-          </h1>
-          <p class="recipe-description">
-            A fresh citrus-forward coastal mocktail inspired by long afternoons on the Malibu pier.
-          </p>
+        <!-- Title + Desc -->
+        <div class="creation-e2e-title-section">
+          <h1 class="creation-e2e-title"></h1>
+          <p class="creation-e2e-desc"></p>
         </div>
 
-        <!-- Ingredients -->
-        <div class="recipe-ingredients-box">
-          <h2 class="recipe-section-title">Ingredients</h2>
-          <div class="recipe-ingredients-list">
-            <ul>
-              <li>4 oz fresh grapefruit juice</li>
-              <li>1 oz lime juice</li>
-              <li>2 oz sparkling water</li>
-              <li>1 tsp agave syrup</li>
-              <li>Sea-salt rim</li>
-              <li>Rosemary sprig or grapefruit wedge (garnish)</li>
-            </ul>
+        <!-- BOM -->
+        <div class="creation-e2e-bom-box">
+          <h2 class="creation-e2e-section-title">Ingredients</h2>
+          <div class="creation-e2e-bom">
+            <ul class="creation-e2e-bom-list"></ul>
           </div>
         </div>
 
-        <!-- Directions -->
-        <div class="recipe-directions">
-          <h2 class="recipe-section-title">Directions</h2>
-          <ol>
-            <li>Run a lime wedge around the rim and dip the glass in sea salt.</li>
-            <li>Fill the glass with ice.</li>
-            <li>Add grapefruit juice, lime juice, and agave syrup.</li>
-            <li>Stir gently to combine.</li>
-            <li>Top with sparkling water.</li>
-            <li>Garnish with rosemary sprig or grapefruit slice.</li>
-          </ol>
+        <!-- Steps -->
+        <div class="creation-e2e-steps">
+          <h2 class="creation-e2e-section-title">Steps</h2>
+          <ol class="creation-e2e-steps-list"></ol>
         </div>
 
         <!-- Notes -->
-        <div class="recipe-notes">
-          <h2 class="recipe-section-title">Notes</h2>
-          <p>
-            Use pink grapefruit for a softer, sweeter profile. Swap sparkling water for tonic if you
-            like more bite, or try smoked sea salt on the rim for an extra coastal twist.
-          </p>
+        <div class="creation-e2e-notes">
+          <h2 class="creation-e2e-section-title">Notes</h2>
+          <p class="creation-e2e-notes-p"></p>
         </div>
 
         <!-- Footer brand line -->
-        <div class="recipeFooter"></div>
+        <div class="makeFooter"></div>
       </div>
 
-      <div class='recipeActions recipe-actions-fixed'></div>
+      <div class='makeActions creation-e2e-actions-fixed'></div>
     </div>`;
     super.init(template, {
-      recipeHeader: [".recipeHeader", RecipeHeader],
-      recipeFooter: [".recipeFooter", RecipeFooter],
-      recipeActions: [".recipeActions", RecipeActions]
+      makeHeader: [".makeHeader", MakeHeader],
+      makeFooter: [".makeFooter", MakeFooter],
+      makeActions: [".makeActions", MakeActions],
+      title: ".creation-e2e-title",
+      desc: ".creation-e2e-desc",
+      heroImg: ".creation-e2e-hero-img",
+      bom: ".creation-e2e-bom-list",
+      steps: ".creation-e2e-steps-list",
+      notes: ".creation-e2e-notes-p"
     }, options);
     return this.dobs;
+  }
+  async play(a) {
+    this.a = a;
+    let creation = dao.CreationByID(this.a.id);
+    if (creation == void 0) {
+      throw new Error("does not exist");
+    }
+    this.creation = creation;
+  }
+  render() {
+    this.title.text(this.creation.title);
+    this.desc.text(this.creation.desc);
+    this.heroImg.attr("src", this.creation.heroImg);
+    this.heroImg.attr("alt", this.creation.title);
+    this.notes.text(this.creation.notes);
+    this.bom.empty();
+    this.creation.bom.forEach((ingredient) => {
+      const li = ingredient.link ? `<li><a href="${ingredient.link}" target="_blank">${ingredient.title}</a></li>` : `<li>${ingredient.title}</li>`;
+      this.bom.append(li);
+    });
+    this.steps.empty();
+    this.creation.steps.forEach((step) => {
+      this.steps.append(`<li>${step}</li>`);
+    });
   }
 };
 
@@ -3864,16 +3921,16 @@ function makeApp(sentry, loader) {
 }
 var RootRedirectRoute = class extends RedirectRoute {
   resolve(a, url) {
-    return RecipeE2EScreen.URL({});
+    return CreationE2EScreen.URL({ id: "paloma" });
   }
   titleGet() {
-    return "Home";
+    return "Paloma";
   }
 };
 var App2 = class extends App {
   // --- Properties ---
   clientId = "";
-  recipeE2EScreen;
+  creationE2EScreen;
   // --- Lifecycle ---
   constructor() {
     super();
@@ -3888,17 +3945,17 @@ var App2 = class extends App {
   <div class='scrimDob fixed hidden stacking top-0 left-0 z-30 w-screen h-screen bg-white dark:bg-black'></div>
 
   <!-- do sort these -->
-  <div style='display: none' class='recipeE2EScreen'></div>
+  <div style='display: none' class='creationE2EScreen'></div>
 </div>`;
     super.init(template, {
       alertPopup: [".alertPopup", AlertPopup],
       blurAllInput: ".blurAllInput",
       scrimDob: ".scrimDob",
-      recipeE2EScreen: [".recipeE2EScreen", RecipeE2EScreen]
+      creationE2EScreen: [".creationE2EScreen", CreationE2EScreen]
     }, options);
     this.clientId = crypto.randomUUID();
     this.router.routeAdd("", [], new RootRedirectRoute(this.router, this.conf));
-    this.router.routeAdd("recipeE2E", [], new ScreenRoute(this, this.recipeE2EScreen));
+    this.router.routeAdd("creation-e2e", [], new ScreenRoute(this, this.creationE2EScreen));
     return this.dobs;
   }
   play() {

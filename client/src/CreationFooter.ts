@@ -1,16 +1,16 @@
 // Copyright © 2018 by Jeremy Kassis. All Rights Reserved.
 import { Cash } from 'cash-dom'
-import { Donut, DonutProps, DonutOptions, html } from './satori/Donut.js'
+import { Donut, DonutProps, DonutOptions, html, css } from './satori/Donut.js'
 import { AddCSS } from './satori/Loader.js'
 
-AddCSS("RecipeFooter", `
-  .recipe-footer-container {
+AddCSS("MakeFooter", css`
+  .make-footer-container {
     margin-top: 1.5rem;
     border-top: 1px solid rgba(6, 78, 59, 0.1);
     padding-top: 0.75rem;
   }
 
-  .recipe-footer-message {
+  .make-footer-message {
     text-align: center;
     font-size: 0.7rem;
     letter-spacing: 0.25em;
@@ -19,7 +19,7 @@ AddCSS("RecipeFooter", `
   }
 `)
 
-export class RecipeFooter extends Donut {
+export class MakeFooter extends Donut {
   declare public a: {
     onShopListAdd: () => Promise<void>
     onShare: () => Promise<void>
@@ -30,8 +30,8 @@ export class RecipeFooter extends Donut {
     template = html`
     <div>
       <!-- Message -->
-      <div class="recipe-footer-container">
-        <p class="recipe-footer-message">
+      <div class="make-footer-container">
+        <p class="make-footer-message">
           A Fresh Take on Coastal Living
         </p>
       </div>

@@ -5,7 +5,7 @@
   "scripts": {
     "assets.bundle": "mkdir -p bundle && rsync -avm --exclude-from=.bundleignore src/ bundle/",
     "assets.bundle.watch": "chokidar 'src/**/*' -i '**/*.ts' -i '**/*.js' -c \"yarn assets.bundle\"",
-    "bundle": "yarn run ts.build && yarn run ts.bundle && yarn run assets.bundle",
+    "bundle": "yarn run ts.build && yarn run assets.bundle",
     "bundle.watch": "concurrently \"yarn ts.bundle.watch\" \"yarn assets.bundle.watch\"",
     "clean": "rm -rf bundle build tsconfig.tsbuildinfo",
     "ts.bundle": "esbuild src/Main.ts --bundle --outfile=bundle/Main.js --format=esm --sourcemap",
