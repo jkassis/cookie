@@ -2,7 +2,7 @@
 import { Cash } from 'cash-dom'
 import { Donut, DonutProps, DonutOptions, html } from './satori/Donut.js'
 
-export class MakeActions extends Donut {
+export class CreationActions extends Donut {
   declare public a: {
     onShopListAdd: () => Promise<void>
     onShare: () => Promise<void>

@@ -3,7 +3,7 @@ import { Cash } from 'cash-dom'
 import { Donut, DonutProps, DonutOptions, html, css } from './satori/Donut.js'
 import { AddCSS } from './satori/Loader.js'
 
-AddCSS("MakeHeader", css`
+AddCSS("CreationHeader", css`
   .make-header-container {
     position: relative;
     margin: 0.5rem;
@@ -68,7 +68,7 @@ AddCSS("MakeHeader", css`
   }
 `)
 
-export class MakeHeader extends Donut {
+export class CreationHeader extends Donut {
   declare public a: {}
 
   public init(template: string, props: DonutProps, options: DonutOptions): Cash {

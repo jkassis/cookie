@@ -13,25 +13,31 @@ export function makeApp(sentry: typeof Sentry, loader: Loader): App {
 
 import './ErrorHandler.js'
 import { CreationE2EScreen } from './CreationE2EScreen.js'
-import { AlertPopup, AlertResponse } from './satori/AlertPopup.js'
+import { CreationsScreen } from './CreationsScreen.js'
+import { AlertPopup } from './satori/AlertPopup.js'
 import { App as Base } from './satori/App.js'
 import { Cash } from 'cash-dom'
 import { DonutFactory } from './satori/DonutFactory.js'
 import { DonutProps, DonutOptions, html } from './satori/Donut.js'
 import { RedirectRoute } from './satori/Router.js'
 import { ScreenRoute } from './satori/Screen.js'
-import { Creation } from './Schema.js'
+import { AddCSS } from './satori/Loader.js'
 
+AddCSS("Main", `
+  .screen {
+    width: 100%;
+  }
+`)
 
 
 
 class RootRedirectRoute extends RedirectRoute {
   public resolve(a: object, url: string): string {
-    return CreationE2EScreen.URL({ id: 'paloma' })
+    return CreationsScreen.URL({})
   }
 
   public titleGet(): string {
-    return "Paloma"
+    return "Mocktails"
   }
 }
 
@@ -39,6 +45,7 @@ export class App extends Base {
   // --- Properties ---
   public clientId: string = ''
   public creationE2EScreen!: CreationE2EScreen
+  public creationsScreen!: CreationsScreen
 
   // --- Lifecycle ---
   constructor() {
@@ -55,7 +62,8 @@ export class App extends Base {
   <div class='scrimDob fixed hidden stacking top-0 left-0 z-30 w-screen h-screen bg-white dark:bg-black'></div>
 
   <!-- do sort these -->
-  <div style='display: none' class='creationE2EScreen'></div>
+  <div style='display: none' class='creationE2EScreen screen'></div>
+  <div style='display: none' class='creationsScreen screen'></div>
 </div>`
 
     super.init(template, {
@@ -64,12 +72,14 @@ export class App extends Base {
       scrimDob: '.scrimDob',
 
       creationE2EScreen: ['.creationE2EScreen', CreationE2EScreen],
+      creationsScreen: ['.creationsScreen', CreationsScreen],
     }, options)
 
 
     this.clientId = crypto.randomUUID()
     this.router.routeAdd('', [], new RootRedirectRoute(this.router, this.conf))
     this.router.routeAdd('creation-e2e', [], new ScreenRoute(this, this.creationE2EScreen))
+    this.router.routeAdd('creations', [], new ScreenRoute(this, this.creationsScreen))
 
     return this.dobs
   }

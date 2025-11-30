@@ -1,9 +1,9 @@
 import { App } from './Main.js'
 import { Cash } from 'cash-dom'
 import { DonutProps, DonutOptions, html, css } from './satori/Donut.js'
-import { MakeActions } from './CreationActions.js'
-import { MakeFooter } from './CreationFooter.js'
-import { MakeHeader } from './CreationHeader.js'
+import { CreationActions } from './CreationActions.js'
+import { CreationFooter } from './CreationFooter.js'
+import { CreationHeader } from './CreationHeader.js'
 import { Router } from './satori/Router.js'
 import { Screen } from './satori/Screen.js'
 import { Creation, Step, Ingredient } from './Schema.js'
@@ -14,7 +14,7 @@ import { dao } from './DAO.js'
 
 
 AddCSS("CreationE2EScreen", css`
-  .creation-e2e-container {
+  .creation-e2e-screen {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -156,8 +156,8 @@ export class CreationE2EScreen extends Screen {
   init(template: string, props: DonutProps, options: DonutOptions): Cash {
     // html annotation intentionally left out
     var template = html`
-    <div class="creation-e2e-container">
-      <div class="makeHeader"></div>
+    <div class="creation-e2e-screen">
+      <div class="creationHeader"></div>
 
       <!-- Edge-to-edge hero image -->
       <div class="creation-e2e-hero">
@@ -201,9 +201,9 @@ export class CreationE2EScreen extends Screen {
     </div>`
 
     super.init(template, {
-      makeHeader: [".makeHeader", MakeHeader],
-      makeFooter: [".makeFooter", MakeFooter],
-      makeActions: [".makeActions", MakeActions],
+      creationHeader: [".creationHeader", CreationHeader],
+      makeFooter: [".makeFooter", CreationFooter],
+      makeActions: [".makeActions", CreationActions],
       title: ".creation-e2e-title",
       desc: ".creation-e2e-desc",
       heroImg: ".creation-e2e-hero-img",
@@ -217,7 +217,7 @@ export class CreationE2EScreen extends Screen {
 
   async play(a: CreationE2EScreen['a']) {
     this.a = a
-    let creation = dao.CreationByID(this.a.id)
+    let creation = await dao.CreationGetByID(this.a.id)
     if (creation == undefined) {
       throw new Error('does not exist')
     }

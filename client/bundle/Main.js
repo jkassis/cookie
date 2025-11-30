@@ -2151,7 +2151,7 @@ var Donut = class {
 };
 
 // src/CreationActions.ts
-var MakeActions = class extends Donut {
+var CreationActions = class extends Donut {
   shopListAddButton;
   shareButton;
   saveButton;
@@ -2184,7 +2184,7 @@ var MakeActions = class extends Donut {
 };
 
 // src/CreationFooter.ts
-AddCSS("MakeFooter", css`
+AddCSS("CreationFooter", css`
   .make-footer-container {
     margin-top: 1.5rem;
     border-top: 1px solid rgba(6, 78, 59, 0.1);
@@ -2199,7 +2199,7 @@ AddCSS("MakeFooter", css`
     text-transform: uppercase;
   }
 `);
-var MakeFooter = class extends Donut {
+var CreationFooter = class extends Donut {
   init(template, props, options) {
     template = html`
     <div>
@@ -2216,7 +2216,7 @@ var MakeFooter = class extends Donut {
 };
 
 // src/CreationHeader.ts
-AddCSS("MakeHeader", css`
+AddCSS("CreationHeader", css`
   .make-header-container {
     position: relative;
     margin: 0.5rem;
@@ -2280,7 +2280,7 @@ AddCSS("MakeHeader", css`
     text-transform: uppercase;
   }
 `);
-var MakeHeader = class extends Donut {
+var CreationHeader = class extends Donut {
   init(template, props, options) {
     template = html`
   <div class="make-header-container">
@@ -2982,6 +2982,11 @@ var creations = {
       { title: "Sea-salt rim", link: "" },
       { title: "Rosemary sprig or grapefruit wedge (garnish)", link: "" }
     ],
+    tags: [
+      "grapefruit",
+      "rosemary"
+    ],
+    time: "10 min",
     steps: [
       "Run a lime wedge around the rim and dip the glass in sea salt.",
       "Fill the glass with ice.",
@@ -2991,18 +2996,267 @@ var creations = {
       "Garnish with rosemary sprig or grapefruit slice."
     ],
     notes: "Use pink grapefruit for a softer, sweeter profile. Swap sparkling water for tonic if you like more bite, or try smoked sea salt on the rim for an extra coastal twist."
+  },
+  "strawberry-basil-lemonade": {
+    id: "strawberry-basil-lemonade",
+    heroImg: "assets/strawberry-basil/hero.png",
+    title: "Strawberry Basil Lemonade",
+    desc: "A refreshing blend of sweet strawberries, fresh basil, and tangy lemon.",
+    bom: [
+      { title: "6 fresh strawberries, hulled", link: "" },
+      { title: "6-8 fresh basil leaves", link: "" },
+      { title: "2 oz fresh lemon juice", link: "" },
+      { title: "1 oz simple syrup", link: "" },
+      { title: "3 oz sparkling water", link: "" },
+      { title: "Basil sprig and strawberry slice (garnish)", link: "" }
+    ],
+    tags: ["strawberry", "basil", "lemon"],
+    time: "5 min",
+    steps: [
+      "Muddle strawberries and basil leaves in a shaker.",
+      "Add lemon juice and simple syrup.",
+      "Fill with ice and shake vigorously for 15 seconds.",
+      "Strain into a glass filled with fresh ice.",
+      "Top with sparkling water.",
+      "Garnish with basil sprig and strawberry slice."
+    ],
+    notes: "For a sweeter version, add an extra 1/2 oz simple syrup. The basil adds a sophisticated herbal note."
+  },
+  "cucumber-mint-cooler": {
+    id: "cucumber-mint-cooler",
+    heroImg: "assets/cucumber-mint/hero.png",
+    title: "Cucumber Mint Cooler",
+    desc: "A light and hydrating drink perfect for hot summer days with cooling cucumber and mint.",
+    bom: [
+      { title: "4-5 cucumber slices", link: "" },
+      { title: "10 fresh mint leaves", link: "" },
+      { title: "1 oz lime juice", link: "" },
+      { title: "3/4 oz honey syrup", link: "" },
+      { title: "2 oz tonic water", link: "" },
+      { title: "Cucumber ribbon and mint sprig (garnish)", link: "" }
+    ],
+    tags: ["cucumber", "mint"],
+    time: "5 min",
+    steps: [
+      "Muddle cucumber slices and mint leaves gently.",
+      "Add lime juice and honey syrup.",
+      "Fill glass with crushed ice.",
+      "Stir to combine.",
+      "Top with tonic water.",
+      "Garnish with cucumber ribbon and mint sprig."
+    ],
+    notes: "Use English cucumber for less bitterness. Honey syrup can be made by mixing equal parts honey and warm water."
+  },
+  "hibiscus-ginger-fizz": {
+    id: "hibiscus-ginger-fizz",
+    heroImg: "assets/hibiscus-ginger/hero.png",
+    title: "Hibiscus Ginger Fizz",
+    desc: "A vibrant ruby-red mocktail with floral hibiscus and spicy ginger notes.",
+    bom: [
+      { title: "2 oz hibiscus tea, chilled", link: "" },
+      { title: "1 oz fresh ginger syrup", link: "" },
+      { title: "1/2 oz lime juice", link: "" },
+      { title: "3 oz ginger beer", link: "" },
+      { title: "Dried hibiscus flower (garnish)", link: "" }
+    ],
+    tags: ["hibiscus", "ginger"],
+    time: "5 min",
+    steps: [
+      "Brew hibiscus tea and chill completely.",
+      "Add hibiscus tea, ginger syrup, and lime juice to glass.",
+      "Fill with ice.",
+      "Top with ginger beer.",
+      "Stir gently.",
+      "Garnish with dried hibiscus flower."
+    ],
+    notes: "Make ginger syrup by simmering equal parts sugar, water, and sliced ginger for 10 minutes. Adjust sweetness to taste."
+  },
+  "pineapple-coconut-crush": {
+    id: "pineapple-coconut-crush",
+    heroImg: "assets/pineapple-coconut/hero.png",
+    title: "Pineapple Coconut Crush",
+    desc: "A tropical paradise in a glass with sweet pineapple and creamy coconut.",
+    bom: [
+      { title: "3 oz fresh pineapple juice", link: "" },
+      { title: "2 oz coconut cream", link: "" },
+      { title: "1 oz lime juice", link: "" },
+      { title: "1/2 oz vanilla syrup", link: "" },
+      { title: "Pineapple wedge and toasted coconut (garnish)", link: "" }
+    ],
+    tags: ["pineapple", "coconut"],
+    time: "5 min",
+    steps: [
+      "Add all ingredients to a blender with 1 cup ice.",
+      "Blend until smooth and frothy.",
+      "Pour into a hurricane or tiki glass.",
+      "Garnish with pineapple wedge and toasted coconut.",
+      "Serve immediately."
+    ],
+    notes: "For a lighter version, use coconut milk instead of coconut cream. Freezing pineapple chunks makes it extra refreshing."
+  },
+  "watermelon-mint-agua-fresca": {
+    id: "watermelon-mint-agua-fresca",
+    heroImg: "assets/watermelon-mint/hero.png",
+    title: "Watermelon Mint Agua Fresca",
+    desc: "A refreshing Mexican-inspired drink with sweet watermelon and cooling mint.",
+    bom: [
+      { title: "2 cups fresh watermelon chunks", link: "" },
+      { title: "8-10 fresh mint leaves", link: "" },
+      { title: "1 oz lime juice", link: "" },
+      { title: "1/2 oz agave nectar", link: "" },
+      { title: "2 oz sparkling water", link: "" },
+      { title: "Watermelon wedge and mint leaf (garnish)", link: "" }
+    ],
+    tags: ["watermelon", "mint"],
+    time: "10 min",
+    steps: [
+      "Blend watermelon chunks until smooth.",
+      "Strain through fine mesh to remove pulp.",
+      "Muddle mint leaves in glass.",
+      "Add watermelon juice, lime juice, and agave.",
+      "Fill with ice and top with sparkling water.",
+      "Garnish with watermelon wedge and mint leaf."
+    ],
+    notes: "This drink is naturally sweet, so adjust agave to taste. Best served very cold on hot days."
+  },
+  "lavender-lemon-spritz": {
+    id: "lavender-lemon-spritz",
+    heroImg: "assets/lavender-lemon/hero.png",
+    title: "Lavender Lemon Spritz",
+    desc: "An elegant and aromatic mocktail with floral lavender and bright lemon.",
+    bom: [
+      { title: "1 oz lavender syrup", link: "" },
+      { title: "1 oz fresh lemon juice", link: "" },
+      { title: "4 oz prosecco-style sparkling water", link: "" },
+      { title: "Lemon twist and lavender sprig (garnish)", link: "" }
+    ],
+    tags: ["lavender", "lemon"],
+    time: "3 min",
+    steps: [
+      "Add lavender syrup and lemon juice to a champagne flute.",
+      "Top with chilled sparkling water.",
+      "Stir gently.",
+      "Garnish with lemon twist and lavender sprig.",
+      "Serve immediately."
+    ],
+    notes: "Make lavender syrup by steeping 2 tbsp dried lavender in 1 cup simple syrup for 15 minutes. Don't over-steep or it becomes soapy."
+  },
+  "spiced-apple-cider-mocktail": {
+    id: "spiced-apple-cider-mocktail",
+    heroImg: "assets/spiced-apple/hero.png",
+    title: "Spiced Apple Cider Mocktail",
+    desc: "A warm and cozy autumn drink with apple cider, cinnamon, and spices.",
+    bom: [
+      { title: "4 oz fresh apple cider", link: "" },
+      { title: "1 cinnamon stick", link: "" },
+      { title: "2 whole cloves", link: "" },
+      { title: "1 star anise", link: "" },
+      { title: "1/2 oz maple syrup", link: "" },
+      { title: "Orange slice and cinnamon stick (garnish)", link: "" }
+    ],
+    tags: ["apple", "cinnamon", "autumn"],
+    time: "15 min",
+    steps: [
+      "Warm apple cider in a small pot with spices.",
+      "Simmer gently for 10 minutes.",
+      "Strain into a heat-safe mug.",
+      "Stir in maple syrup.",
+      "Garnish with orange slice and cinnamon stick.",
+      "Serve warm."
+    ],
+    notes: "Can be served cold over ice in summer. Add a dash of vanilla extract for extra warmth. Makes your kitchen smell amazing!"
+  },
+  "blood-orange-thyme-sparkler": {
+    id: "blood-orange-thyme-sparkler",
+    heroImg: "assets/blood-orange/hero.png",
+    title: "Blood Orange Thyme Sparkler",
+    desc: "A sophisticated mocktail with vibrant blood orange and earthy thyme.",
+    bom: [
+      { title: "3 oz fresh blood orange juice", link: "" },
+      { title: "3-4 fresh thyme sprigs", link: "" },
+      { title: "1/2 oz honey syrup", link: "" },
+      { title: "2 oz sparkling water", link: "" },
+      { title: "Blood orange wheel and thyme sprig (garnish)", link: "" }
+    ],
+    tags: ["blood orange", "thyme"],
+    time: "5 min",
+    steps: [
+      "Gently muddle 2 thyme sprigs with honey syrup.",
+      "Add blood orange juice and ice.",
+      "Shake well for 10 seconds.",
+      "Strain into a coupe glass.",
+      "Top with sparkling water.",
+      "Garnish with blood orange wheel and thyme sprig."
+    ],
+    notes: "Blood orange season is winter through spring. Regular oranges work but lack the stunning ruby color."
+  },
+  "mango-chili-lime-mocktail": {
+    id: "mango-chili-lime-mocktail",
+    heroImg: "assets/mango-chili/hero.png",
+    title: "Mango Chili Lime Mocktail",
+    desc: "A bold and spicy tropical drink with sweet mango, tangy lime, and a chili kick.",
+    bom: [
+      { title: "3 oz fresh mango puree", link: "" },
+      { title: "1 oz lime juice", link: "" },
+      { title: "1/2 oz agave syrup", link: "" },
+      { title: "Pinch of chili powder", link: "" },
+      { title: "2 oz sparkling water", link: "" },
+      { title: "Taj\xEDn rim, mango slice, and lime wheel (garnish)", link: "" }
+    ],
+    tags: ["mango", "chili", "lime"],
+    time: "7 min",
+    steps: [
+      "Rim glass with lime juice and dip in Taj\xEDn seasoning.",
+      "Blend mango puree, lime juice, agave, and chili powder.",
+      "Pour into prepared glass over ice.",
+      "Top with sparkling water.",
+      "Garnish with mango slice and lime wheel.",
+      "Serve immediately."
+    ],
+    notes: "Adjust chili to your heat preference. For a smoky version, use chipotle powder instead of chili powder."
+  },
+  "blueberry-sage-smash": {
+    id: "blueberry-sage-smash",
+    heroImg: "assets/blueberry-sage/hero.png",
+    title: "Blueberry Sage Smash",
+    desc: "A beautiful purple mocktail with antioxidant-rich blueberries and aromatic sage.",
+    bom: [
+      { title: "1/2 cup fresh blueberries", link: "" },
+      { title: "4-5 fresh sage leaves", link: "" },
+      { title: "1 oz lemon juice", link: "" },
+      { title: "3/4 oz simple syrup", link: "" },
+      { title: "2 oz club soda", link: "" },
+      { title: "Blueberries and sage leaf (garnish)", link: "" }
+    ],
+    tags: ["blueberry", "sage"],
+    time: "5 min",
+    steps: [
+      "Muddle blueberries and sage leaves in a shaker.",
+      "Add lemon juice and simple syrup.",
+      "Fill with ice and shake vigorously.",
+      "Double strain into a rocks glass with fresh ice.",
+      "Top with club soda.",
+      "Garnish with fresh blueberries and sage leaf."
+    ],
+    notes: "The double strain removes seeds and herb bits for a cleaner drink. Sage pairs surprisingly well with berries."
   }
 };
 var DAO = class {
-  CreationByID(id) {
+  async CreationGetByID(id) {
     return creations[id];
+  }
+  async CreationsGet(pageSize, pageNum) {
+    const allCreations = Object.values(creations);
+    const start = pageNum * pageSize;
+    const end = start + pageSize;
+    return allCreations.slice(start, end);
   }
 };
 var dao = new DAO();
 
 // src/CreationE2EScreen.ts
 AddCSS("CreationE2EScreen", css`
-  .creation-e2e-container {
+  .creation-e2e-screen {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -3134,8 +3388,8 @@ var CreationE2EScreen = class extends Screen {
   makeFooter;
   init(template, props, options) {
     var template = html`
-    <div class="creation-e2e-container">
-      <div class="makeHeader"></div>
+    <div class="creation-e2e-screen">
+      <div class="creationHeader"></div>
 
       <!-- Edge-to-edge hero image -->
       <div class="creation-e2e-hero">
@@ -3178,9 +3432,9 @@ var CreationE2EScreen = class extends Screen {
       <div class='makeActions creation-e2e-actions-fixed'></div>
     </div>`;
     super.init(template, {
-      makeHeader: [".makeHeader", MakeHeader],
-      makeFooter: [".makeFooter", MakeFooter],
-      makeActions: [".makeActions", MakeActions],
+      creationHeader: [".creationHeader", CreationHeader],
+      makeFooter: [".makeFooter", CreationFooter],
+      makeActions: [".makeActions", CreationActions],
       title: ".creation-e2e-title",
       desc: ".creation-e2e-desc",
       heroImg: ".creation-e2e-hero-img",
@@ -3192,7 +3446,7 @@ var CreationE2EScreen = class extends Screen {
   }
   async play(a) {
     this.a = a;
-    let creation = dao.CreationByID(this.a.id);
+    let creation = await dao.CreationGetByID(this.a.id);
     if (creation == void 0) {
       throw new Error("does not exist");
     }
@@ -3213,6 +3467,398 @@ var CreationE2EScreen = class extends Screen {
     this.creation.steps.forEach((step) => {
       this.steps.append(`<li>${step}</li>`);
     });
+  }
+};
+
+// src/CreationBrief.ts
+AddCSS("CreationBrief", css`
+  .creation-brief-card {
+    width: 100%;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid rgb(241, 245, 249);
+    overflow: hidden;
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem;
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+  }
+
+  .creation-brief-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(-0.125rem);
+  }
+
+  @media (min-width: 640px) {
+    .creation-brief-card {
+      padding: 1rem;
+    }
+  }
+
+  .creation-brief-thumbnail {
+    flex-shrink: 0;
+  }
+
+  .creation-brief-thumb-wrapper {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: rgb(241, 245, 249);
+  }
+
+  @media (min-width: 640px) {
+    .creation-brief-thumb-wrapper {
+      width: 7rem;
+      height: 7rem;
+    }
+  }
+
+  .creation-brief-thumb-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .creation-brief-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .creation-brief-header {
+    margin-bottom: 0.25rem;
+  }
+
+  .creation-brief-title {
+    font-size: 1.125rem;
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-weight: 600;
+    color: rgb(6, 78, 59);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 640px) {
+    .creation-brief-title {
+      font-size: 1.25rem;
+    }
+  }
+
+  .creation-brief-desc {
+    font-size: 0.75rem;
+    color: rgb(71, 85, 105);
+    line-height: 1.375;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .creation-brief-desc {
+      font-size: 0.875rem;
+    }
+  }
+
+  .creation-brief-meta {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 0.75rem;
+    font-size: 0.75rem;
+    color: rgb(51, 65, 85);
+  }
+
+  @media (min-width: 640px) {
+    .creation-brief-meta {
+      font-size: 0.75rem;
+    }
+  }
+
+  .creation-brief-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .creation-brief-footer {
+    margin-top: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(148, 163, 184);
+  }
+`);
+var CreationBrief = class extends Donut {
+  // Private Cash elements for dynamic content
+  heroImg;
+  title;
+  desc;
+  timeMetaIcon;
+  timeMeta;
+  tagMetaIcon;
+  tagMeta;
+  brandFooter;
+  init(template, props, options) {
+    template = html`
+<div class="creation-brief-card">
+  <!-- Thumbnail -->
+  <div class="creation-brief-thumbnail">
+    <div class="creation-brief-thumb-wrapper">
+      <img class="creation-hero-img" src="" alt="" />
+    </div>
+  </div>
+
+  <!-- Text content -->
+  <div class="creation-brief-content">
+    <!-- Title + tagline -->
+    <header class="creation-brief-header">
+      <h2 class="creation-brief-title"></h2>
+      <p class="creation-brief-desc"></p>
+    </header>
+
+    <!-- Meta row -->
+    <div class="creation-brief-meta">
+      <span class="creation-brief-meta-item">
+        <span class="creation-time-meta-icon" aria-hidden="true"></span>
+        <span class="creation-time-meta"></span>
+      </span>
+      <span class="creation-brief-meta-item">
+        <span class="creation-ingredient-meta-icon" aria-hidden="true"></span>
+        <span class="creation-ingredient-meta"></span>
+      </span>
+      <span class="creation-brief-meta-item">
+        <span class="creation-tag-meta-icon" aria-hidden="true"></span>
+        <span class="creation-tag-meta"></span>
+      </span>
+    </div>
+
+    <!-- Brand line -->
+    <footer class="creation-brief-footer"></footer>
+  </div>
+</div>`;
+    super.init(template, {
+      heroImg: ".creation-hero-img",
+      title: ".creation-brief-title",
+      desc: ".creation-brief-desc",
+      timeMetaIcon: ".creation-time-meta-icon",
+      timeMeta: ".creation-time-meta",
+      tagMetaIcon: ".creation-tag-meta-icon",
+      tagMeta: ".creation-tag-meta",
+      brandFooter: ".creation-brief-footer"
+    }, options);
+    this.dobs.on("click", async () => {
+      if (this.a.onClick) {
+        await this.a.onClick(this.a.creation);
+      }
+    });
+    return this.dobs;
+  }
+  async play(creation) {
+    this.a.creation = creation;
+    this.render();
+  }
+  render() {
+    if (!this.a.creation) return;
+    this.title.text(this.a.creation.title);
+    this.desc.text(this.a.creation.desc);
+    this.heroImg.attr("src", this.a.creation.heroImg);
+    this.heroImg.attr("alt", this.a.creation.title);
+    this.timeMetaIcon.text("\u23F1");
+    this.timeMeta.text(this.a.creation.time);
+    this.tagMetaIcon.text("\u{1F33F}");
+    this.tagMeta.text(this.a.creation.tags?.join(" "));
+    this.brandFooter.text("FarmGoods Market");
+  }
+};
+
+// src/satori/List.ts
+var List = class extends Donut {
+  itemDonuts;
+  listDob;
+  constructor() {
+    super();
+    this.itemDonuts = [];
+  }
+  init(template, props, options) {
+    template = html`
+<div class='list'></div>`;
+    super.init(template, props, options);
+    this.a.docs = [];
+    this.listDob = this.dobs.get(0);
+    return this.dobs;
+  }
+  itemDonutGet(i) {
+    if (this.itemDonuts[i]) return this.itemDonuts[i];
+    var donut = this.donutFactory.donutBake(this.a.item.class, void 0, void 0, this.a.item.options);
+    if (this.a.item.a)
+      for (var key of Object.keys(this.a.item.a))
+        donut.a[key] = this.a.item.a[key];
+    this.listDob.append(donut.dobs.get(0));
+    this.itemDonuts[i] = donut;
+    return donut;
+  }
+  refresh() {
+    let i = 0;
+    for (; i < this.a.docs.length; i++) {
+      const itemDonut = this.itemDonutGet(i);
+      itemDonut.render();
+    }
+  }
+  render() {
+    var promises = [];
+    var docs = this.a.docs;
+    let i = 0;
+    for (; i < docs.length; i++) {
+      const itemDonut = this.itemDonutGet(i);
+      const j = i;
+      this.a.item.docSet(itemDonut, docs[j]);
+      itemDonut.dobs.show();
+      promises.push(this.a.item.render(itemDonut));
+    }
+    for (; i < this.itemDonuts.length; i++)
+      this.itemDonuts[i].dobs.hide();
+    return Promise.all(promises);
+  }
+  async valueIsValidAndFinal() {
+  }
+};
+
+// src/satori/IList.ts
+var VIList = class {
+  // public a: {}
+  hasMore = false;
+  list;
+  page0Loaded = false;
+  pageGet;
+  pageNext = 0;
+  pageNextPlaying = false;
+  scrollEvtListener = (evt) => {
+    this.scroll(evt);
+  };
+  scroller;
+  scrollingElement;
+  constructor(scrollingElement, list, pageGet) {
+    this.scrollingElement = scrollingElement;
+    this.list = list;
+    this.pageGet = pageGet;
+  }
+  init() {
+    return this;
+  }
+  async pageNextGet() {
+    this.page0Loaded = true;
+    if (this.pageNextPlaying || !this.hasMore) return;
+    this.pageNextPlaying = true;
+    var result = await this.pageGet(this.pageNext);
+    this.pageNextPlaying = false;
+    if (result.length == 0) {
+      this.hasMore = false;
+      return;
+    }
+    this.pageNext++;
+    this.list.a.docs.splice(this.list.a.docs.length, 0, ...result);
+    this.list.render();
+  }
+  async play() {
+    window.addEventListener("scroll", this.scrollEvtListener);
+  }
+  render() {
+    this.list.render();
+  }
+  async reset() {
+    this.pageNext = 0;
+    this.hasMore = true;
+    this.page0Loaded = false;
+    if (this.list.a.docs && this.list.a.docs.length) {
+      this.list.a.docs = [];
+      await this.list.render();
+    } else {
+      this.list.a.docs = [];
+    }
+  }
+  scroll(evt) {
+    if (this.scrollingElement.scrollTop() + 2 * window.innerHeight < document.body.clientHeight) {
+      return;
+    }
+    this.pageNextGet();
+  }
+  stop() {
+    window.removeEventListener("scroll", this.scrollEvtListener);
+  }
+};
+
+// src/CreationsScreen.ts
+AddCSS("CreationsScreen", css`
+.creationsScreen .creations-screen-list {
+  background-color: #f5f1ed;
+  width: 100%;
+}
+
+.creationsScreen .creations-screen-list > * {
+  margin-bottom: 1rem;
+}
+
+.creationsScreen .creations-screen-list > *:last-child {
+  margin-bottom: 0;
+}
+`);
+var CreationsScreen = class extends Screen {
+  static URL(a) {
+    return `creations?${Router.aToURLParams(a)}`;
+  }
+  iList;
+  list;
+  init(template, props, options) {
+    var template = html`
+<div class='creationsScreen'>
+  <div class='screenHeader'></div>
+  <div class='creations-screen-list'></div>
+</div>`;
+    super.init(template, {
+      list: [".creations-screen-list", List],
+      creationHeader: [".screenHeader", CreationHeader]
+    }, options);
+    this.list.a = {
+      docs: [],
+      item: {
+        class: CreationBrief,
+        docSet: (donut, doc) => donut.a.creation = doc,
+        a: {
+          creation: {},
+          onClick: async (c) => {
+            this.app.router.playFwd(CreationE2EScreen.URL({ id: c.id }));
+          }
+        },
+        render: (donut) => donut.play(donut.a.creation).then(() => donut.render())
+      }
+    };
+    this.iList = new VIList(
+      this.app.scrollingElement,
+      this.list,
+      (p) => this.listPageGet(p)
+    ).init();
+    return this.dobs;
+  }
+  async play(a) {
+    await this.iList.play();
+    this.iList.reset();
+    this.iList.pageNextGet();
+  }
+  async stop() {
+    this.iList.stop();
+  }
+  render() {
+  }
+  listPageGet(page) {
+    return dao.CreationsGet(20, page);
   }
 };
 
@@ -3919,18 +4565,24 @@ function makeApp(sentry, loader) {
   app.donutFactory = new DonutFactory({ app, conf: env, api: app.api, loader });
   return app;
 }
+AddCSS("Main", `
+  .screen {
+    width: 100%;
+  }
+`);
 var RootRedirectRoute = class extends RedirectRoute {
   resolve(a, url) {
-    return CreationE2EScreen.URL({ id: "paloma" });
+    return CreationsScreen.URL({});
   }
   titleGet() {
-    return "Paloma";
+    return "Mocktails";
   }
 };
 var App2 = class extends App {
   // --- Properties ---
   clientId = "";
   creationE2EScreen;
+  creationsScreen;
   // --- Lifecycle ---
   constructor() {
     super();
@@ -3945,17 +4597,20 @@ var App2 = class extends App {
   <div class='scrimDob fixed hidden stacking top-0 left-0 z-30 w-screen h-screen bg-white dark:bg-black'></div>
 
   <!-- do sort these -->
-  <div style='display: none' class='creationE2EScreen'></div>
+  <div style='display: none' class='creationE2EScreen screen'></div>
+  <div style='display: none' class='creationsScreen screen'></div>
 </div>`;
     super.init(template, {
       alertPopup: [".alertPopup", AlertPopup],
       blurAllInput: ".blurAllInput",
       scrimDob: ".scrimDob",
-      creationE2EScreen: [".creationE2EScreen", CreationE2EScreen]
+      creationE2EScreen: [".creationE2EScreen", CreationE2EScreen],
+      creationsScreen: [".creationsScreen", CreationsScreen]
     }, options);
     this.clientId = crypto.randomUUID();
     this.router.routeAdd("", [], new RootRedirectRoute(this.router, this.conf));
     this.router.routeAdd("creation-e2e", [], new ScreenRoute(this, this.creationE2EScreen));
+    this.router.routeAdd("creations", [], new ScreenRoute(this, this.creationsScreen));
     return this.dobs;
   }
   play() {

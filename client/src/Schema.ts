@@ -8,11 +8,13 @@ export class Ingredient {
 export type Step = string
 
 export class Creation {
-  public id: string = ""
-  public heroImg: string = ""
-  public title: string = ""
-  public desc: string = ""
   public bom: Ingredient[] = []
-  public steps: Step[] = []
+  public desc: string = ""
+  public heroImg: string = ""
+  public id: string = ""
   public notes: string = ""
+  public steps: Step[] = []
+  public tags: string[] = []
+  public time: string = ""
+  public title: string = ""
 }

@@ -3,7 +3,7 @@ import { Cash } from 'cash-dom'
 import { Donut, DonutProps, DonutOptions, html, css } from './satori/Donut.js'
 import { AddCSS } from './satori/Loader.js'
 
-AddCSS("MakeFooter", css`
+AddCSS("CreationFooter", css`
   .make-footer-container {
     margin-top: 1.5rem;
     border-top: 1px solid rgba(6, 78, 59, 0.1);
@@ -19,7 +19,7 @@ AddCSS("MakeFooter", css`
   }
 `)
 
-export class MakeFooter extends Donut {
+export class CreationFooter extends Donut {
   declare public a: {
     onShopListAdd: () => Promise<void>
     onShare: () => Promise<void>
