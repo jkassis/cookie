@@ -59,9 +59,10 @@ async fn static_file_handler(
   }
   let serve_from_src = is_ts_or_map;
   let dir = if serve_from_src {
-    "src"
+    "src".to_string()
   } else {
-    "../client/bundle"
+    std::env::var("BUNDLE_DIR")
+      .unwrap_or_else(|_| "../client/bundle".to_string())
   };
   let path = format!("{}/{}", dir, filename);
   match std::fs::read_to_string(&path) {
