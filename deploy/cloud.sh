@@ -15,7 +15,7 @@ run() {
   local COMMAND="$1"
   case "$COMMAND" in
   "build")
-    pushd client
+    pushd tiers/client
     yarn bundle
     popd
     go run ./deploy/ build
@@ -27,7 +27,7 @@ run() {
     go run ./deploy/ release
     ;;
   *)
-    pushd client
+    pushd tiers/client
     yarn bundle
     popd
     go run ./deploy/ build
@@ -37,4 +37,4 @@ run() {
   esac
 }
 
-run "$1"
+run "${1:-}"
