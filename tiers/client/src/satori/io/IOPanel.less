@@ -1,0 +1,170 @@
+.IOPanel {
+  .IO.text {
+    .field.textarea {
+      background-image: url(/static/img/dots.bubble.png);
+    }
+
+    .field {
+      .padding-b-m;
+      .padding-t-xs;
+      background-color: #ffc;
+      background-image: url(/static/img/dots.png);
+      background-repeat: repeat;
+      border-radius: 15px;
+      color: DarkSlateGrey;
+      text-align: center;
+    }
+  }
+
+  .IO.check {
+    .field {
+      background-color: #ffc;
+      background-image: url(/static/img/dots.png);
+      border-radius: 15px;
+      color: DarkSlateGrey;
+      height: 60px;
+      width: 60px;
+    }
+  }
+
+  .logo {
+    .margin-x-a;
+    border-radius: 10px 10px 10px 10px;
+    display: block;
+    height: auto;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+  }
+
+  .message {
+    .margin-x-a;
+    color: DarkSlateGrey;
+    display: block;
+    font-weight: 500;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .help.btn {
+    border-radius: 15px;
+    height: 40px;
+    width: 40px;
+  }
+
+  .checkboxAndHelp {
+    .margin-t-m;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .check.IO {
+      flex-direction: row;
+      flex: 1;
+    }
+
+    .label {
+      .padding-l-m;
+      font-weight: bold;
+    }
+  }
+
+  @media @fourk {
+
+    .IO.text,
+    .IO.check {
+      .field {
+        font-size: 28px;
+      }
+    }
+
+    .message {
+      font-size: 30px;
+    }
+  }
+
+  @media @laptopl {
+
+    .IO.text,
+    .IO.check {
+      .field {
+        font-size: 26px;
+      }
+    }
+
+    .message {
+      font-size: 28px;
+    }
+  }
+
+  @media @laptop {
+
+    .IO.text,
+    .IO.check {
+      .field {
+        font-size: 24px;
+      }
+    }
+
+    .message {
+      font-size: 26px;
+    }
+  }
+
+  @media @tablet {
+
+    .IO.text,
+    .IO.check {
+      .field {
+        font-size: 22px;
+      }
+    }
+
+    .message {
+      font-size: 24px;
+    }
+  }
+
+  @media @mobilel {
+
+    .IO.text,
+    .IO.check {
+      .field {
+        font-size: 20px;
+      }
+    }
+
+    .message {
+      font-size: 19px;
+    }
+  }
+
+  @media @mobilem {
+
+    .IO.text,
+    .IO.check {
+      .field {
+        font-size: 16px;
+      }
+    }
+
+    .message {
+      font-size: 17px;
+    }
+  }
+
+  @media @mobiles {
+
+    .IO.text,
+    .IO.check {
+      .field {
+        font-size: 14px;
+      }
+    }
+
+    .message {
+      font-size: 15px;
+    }
+  }
+}

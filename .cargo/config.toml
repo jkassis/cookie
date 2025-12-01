@@ -7,9 +7,9 @@ rustflags = [ "-Clink-args=-Wl,-rpath,\\$ORIGIN" ]
 
 [target.aarch64-apple-darwin]
 rustflags = [
-    "-L", "/Users/jkassis/Code/cookie/server/lib/",
+    "-L", "/Users/jkassis/Code/cookie/tiers/server/lib/",
      "-Clink-args=-Wl,-rpath,\\$ORIGIN",
 ]
 
 [build]
-target-dir = "server/target"
+target-dir = "tiers/server/target"

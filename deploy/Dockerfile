@@ -22,7 +22,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 WORKDIR /usr/src/app
 
 # Copy manifests and build.rs
-COPY server/Cargo.toml server/Cargo.lock server/build.rs ./
+COPY tiers/server/Cargo.toml tiers/server/Cargo.lock tiers/server/build.rs ./
 
 # Create dummy main to cache dependencies
 RUN mkdir src && echo "fn main() {}" > src/main.rs
@@ -34,7 +34,7 @@ ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 RUN cargo build --release && rm -rf src target/release/deps/cookie*
 
 # Copy real source
-COPY server/src ./src
+COPY tiers/server/src ./src
 
 # Build the real application
 RUN cargo build --release && strip target/release/cookie
@@ -48,12 +48,12 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certifi
 COPY --from=builder /usr/src/app/target/release/cookie /usr/local/bin/cookie
 
 # Copy server configuration into the runtime image
-COPY server/conf/ /etc/app/conf/
+COPY tiers/server/conf/ /etc/app/conf/
 ENV CERT_DIR "/etc/app/conf/tls"
 
 # Copy static assets
-COPY client/bundle/ /usr/local/bin/client/bundle/
-COPY client/assets/ /usr/local/bin/client/assets/
+COPY tiers/client/bundle/ /usr/local/bin/client/bundle/
+COPY tiers/client/assets/ /usr/local/bin/client/assets/
 ENV ASSETS_DIR "/usr/local/bin/client/assets"
 
 # Runtime working directory

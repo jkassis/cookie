@@ -8,5 +8,13 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.inlayHints.parameterNames.enabled": "all",
   "typescript.inlayHints.variableTypes.enabled": true,
-  "typescript.inlayHints.functionLikeReturnTypes.enabled": true
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "search.exclude": {
+    "tiers/client/node_modules": true,
+    "tiers/client/bundle": true,
+    "tiers/common/typescript/node_modules": true,
+    "tiers/server/target": true,
+    "**/.git": true,
+    "**/coverage": true
+  }
 }

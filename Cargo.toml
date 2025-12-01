@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
 members = [
-  "server",
-  "common/rust"
+  "tiers/server",
+  "tiers/common/rust"
 ]

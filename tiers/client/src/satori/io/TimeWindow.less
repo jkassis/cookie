@@ -1,0 +1,30 @@
+.timeWindow.IO {
+  display: grid;
+  grid-template:
+    'a b c' auto
+    / 60px 120px 60px;
+  column-gap: 5px;
+
+  .desc {
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid @thmUiColor2;
+    color: @thmStdTextClr1;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .moreButton,
+  .lessButton {
+    align-items: center;
+    background-color: @thmUiColor1;
+    border-radius: 10px;
+    border: 2px solid @thmUiColor2;
+    color: white;
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+  }
+}

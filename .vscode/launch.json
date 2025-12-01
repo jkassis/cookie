@@ -11,10 +11,10 @@
       "runtimeExecutable": "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary",
       "url": "https://0.0.0.0:8443",
       "showAsyncStacks": true,
-      "webRoot": "${workspaceFolder}/client/bundle",
+      "webRoot": "${workspaceFolder}/tiers/client/bundle",
       "sourceMapPathOverrides": {
         // "../../../src/*": "${webRoot}/src/*",
-        // "../../../../server/api/*": "${workspaceFolder}/server/api",
+        // "../../../../server/api/*": "${workspaceFolder}/tiers/server/api",
       },
       "runtimeArgs": [
         "--disable-web-security",
@@ -27,9 +27,9 @@
       "name": "Server",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/server/target/debug/${workspaceFolderBasename}",
+      "program": "${workspaceFolder}/tiers/server/target/debug/${workspaceFolderBasename}",
       "args": [],
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}/tiers/server",
       "preLaunchTask": "build with cargo",
       "postDebugTask": "",
       "internalConsoleOptions": "neverOpen",
@@ -39,7 +39,7 @@
       ],
       "env": {
         "DEBUG": "1",
-        "DYLD_LIBRARY_PATH": "/opt/homebrew/lib:/Users/jkassis/Code/cookie/server/lib",
+        "DYLD_LIBRARY_PATH": "/opt/homebrew/lib:${workspaceFolder}/tiers/server/lib",
         "GST_DEBUG": "*:3",
         "OMP_NUM_THREADS": "4",
         "RUST_BACKTRACE": "1",

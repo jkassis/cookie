@@ -1,0 +1,294 @@
+.dialog.screen {
+  >.pane {
+    background-color: ghostwhite;
+    border: 1px solid Grey;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0px 0px 20px #fff;
+    flex: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .section {
+      >.header {
+        .buttons {
+          .buttons {
+            display: grid;
+            grid-auto-columns: min-content;
+            grid-auto-flow: column;
+            grid-gap: 3px;
+          }
+        }
+      }
+    }
+  }
+
+  @media @fourk {
+    >.pane {
+      margin-bottom: 10%;
+      width: 50%;
+    }
+  }
+
+  @media @laptopl {
+
+    h3,
+    .h3 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 24px;
+
+      .button {
+        font-size: 20px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+    }
+
+    h4,
+    .h4 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 20px;
+
+      .button {
+        font-size: 16px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+
+      .dink {
+        margin-right: 11px;
+      }
+    }
+
+    .headroom {
+      min-height: 80px;
+    }
+
+    >.pane {
+      margin-bottom: 10%;
+      width: 60%;
+    }
+
+    .message {
+      font-size: 28px;
+    }
+  }
+
+  @media @laptop {
+
+    h3,
+    .h3 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 24px;
+
+      .button {
+        font-size: 20px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+    }
+
+    h4,
+    .h4 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 20px;
+
+      .button {
+        font-size: 16px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+
+      .dink {
+        margin-right: 11px;
+      }
+    }
+
+    .headroom {
+      min-height: 80px;
+    }
+
+    >.pane {
+      margin-bottom: 15%;
+      width: 75%;
+    }
+
+    .message {
+      font-size: 26px;
+    }
+  }
+
+  @media @tablet {
+
+    h3,
+    .h3 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 24px;
+
+      .button {
+        font-size: 20px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+    }
+
+    h4,
+    .h4 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 20px;
+
+      .button {
+        font-size: 16px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+
+      .dink {
+        margin-right: 11px;
+      }
+    }
+
+    .headroom {
+      min-height: 60px;
+    }
+
+    >.pane {
+      margin-bottom: 10%;
+      width: 90%;
+    }
+
+    .message {
+      font-size: 24px;
+    }
+  }
+
+  @media @mobilel {
+
+    h3,
+    .h3 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 22px;
+
+      .button {
+        font-size: 18px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+    }
+
+    h4,
+    .h4 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 18px;
+
+      .button {
+        font-size: 14px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+
+      .dink {
+        margin-right: 6px;
+      }
+    }
+
+    .headroom {
+      min-height: 60px;
+    }
+
+    >.pane {
+      margin-bottom: 10%;
+      width: 95%;
+    }
+
+    .message {
+      font-size: 19px;
+    }
+  }
+
+  @media @mobilem {
+
+    h3,
+    .h3 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 20px;
+
+      .button {
+        font-size: 16px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+    }
+
+    h4,
+    .h4 {
+      align-items: center;
+      flex-direction: row;
+      font-size: 16px;
+
+      .button {
+        font-size: 12px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+
+      .dink {
+        margin-right: 6px;
+      }
+    }
+
+    .headroom {
+      min-height: 50px;
+    }
+
+    >.pane {
+      margin-bottom: 5%;
+      width: 95%;
+    }
+
+    .message {
+      font-size: 17px;
+    }
+  }
+
+  @media @mobiles {
+
+    h3,
+    .h3 {
+      flex-direction: column;
+      font-size: 18px;
+
+      .button {
+        font-size: 14px;
+        min-width: 40px;
+        min-height: 40px;
+      }
+
+      .note {
+        left: 0;
+        right: initial;
+      }
+    }
+
+    .headroom {
+      min-height: 40px;
+    }
+
+    >.pane {
+      margin-bottom: 2%;
+      width: 98%;
+    }
+
+    .message {
+      font-size: 15px;
+    }
+  }
+}

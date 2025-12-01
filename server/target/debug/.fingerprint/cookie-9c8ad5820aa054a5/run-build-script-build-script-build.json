@@ -1,0 +1,1 @@
+{"rustc":16243257175721966122,"features":"","declared_features":"","target":0,"profile":0,"path":0,"deps":[[18212481489039380786,"build_script_build",false,4223955094877406136]],"local":[{"Precalculated":"1764602334.139477800s (src/service.rs)"}],"rustflags":["-L","/Users/jkassis/Code/cookie/server/lib/","-Clink-args=-Wl,-rpath,\\$ORIGIN"],"config":0,"compile_kind":0}
