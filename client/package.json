@@ -16,22 +16,24 @@
   },
   "devDependencies": {
     "@types/chai": "^5.2.2",
-    "esbuild": "^0.24.0",
     "@types/chai-as-promised": "^8.0.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "^20.0.0",
     "chai": "^6.2.0",
     "chai-as-promised": "^8.0.2",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.24.0",
     "mocha": "^11.7.4",
-    "typescript": "^5.0.0",
-    "concurrently": "^8.2.2"
+    "typescript": "^5.0.0"
   },
   "dependencies": {
     "@jkassis/luxon": "^2.0.8",
     "@jkassis/nexttime": "^1.0.26",
     "@shopify/storefront-api-client": "^1.0.9",
     "@types/auth0-lock": "^11.27.9",
-    "auth0-lock": "^14.1.0",
+    "auth0": "^5.1.0",
+    "auth0-js": "^9.29.0",
+    "auth0-lock": "^14.2.0",
     "blueimp-file-upload": "^10.32.0",
     "blueimp-load-image": "^5.16.0",
     "cash-dom": "^8.1.5",

@@ -1,5 +1,5 @@
 
-import { Creation } from './Schema.js'
+import { Creation, User, UUID } from './Schema.js'
 
 
 let creations: Record<string, Creation> = {
@@ -285,6 +285,35 @@ class DAO {
     const start = pageNum * pageSize
     const end = start + pageSize
     return allCreations.slice(start, end)
+  }
+
+  async UserGetOrCreate(args: {
+    userID: UUID,
+    createParams: {
+      userID: string,
+      email?: string,
+      nameFamily?: string,
+      nameGiven?: string,
+      nameAlias?: string,
+      nameNick?: string,
+      gender?: string,
+      createdAt: string,
+      lastLogin: string,
+      role: string,
+    }
+  }): Promise<User> {
+    return {
+      id: args.userID,
+      email: args.createParams.email,
+      nameFamily: args.createParams.nameFamily,
+      nameGiven: args.createParams.nameGiven,
+      nameAlias: args.createParams.nameAlias,
+      nameNick: args.createParams.nameNick,
+      gender: args.createParams.gender,
+      createdAt: args.createParams.createdAt,
+      lastLogin: args.createParams.lastLogin,
+      role: args.createParams.role,
+    }
   }
 }
 
