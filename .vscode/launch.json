@@ -24,6 +24,13 @@
       // "preLaunchTask": "tsc: apps/store/src"
     },
     {
+      "name": "Deploy",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "${workspaceFolder}/deploy/cloud.sh",
+      "cwd": "${workspaceFolder}"
+    },
+    {
       "name": "Server",
       "type": "lldb",
       "request": "launch",
