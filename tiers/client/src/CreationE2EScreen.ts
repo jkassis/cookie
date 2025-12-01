@@ -2,10 +2,10 @@ import { App } from './Main.js'
 import { Cash } from 'cash-dom'
 import { DonutProps, DonutOptions, html, css } from './satori/Donut.js'
 import { CreationActions } from './CreationActions.js'
-import { CreationFooter } from './CreationFooter.js'
-import { CreationHead } from './CreationHead.js'
+import { CreationFoot } from './CreationFoot.js'
 import { Router } from './satori/Router.js'
 import { Screen } from './satori/Screen.js'
+import { ScreenHead } from './ScreenHead.js'
 import { Creation, Step, Ingredient } from './Schema.js'
 import { AddCSS } from './satori/Loader.js'
 import { dao } from './DAO.js'
@@ -24,21 +24,20 @@ AddCSS("CreationE2EScreen", css`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding-bottom: 5rem;
   }
 
-  .creation-e2e-hero {
+  .creation-e2e-screen .creation-e2e-hero {
     width: 100%;
     aspect-ratio: 4/3;
   }
 
-  .creation-e2e-hero img {
+ .creation-e2e-screen .hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .creation-e2e-content {
+  .creation-e2e-screen .content {
     padding: 1.25rem 1.5rem 1.5rem;
     max-width: 42rem;
     margin-left: auto;
@@ -46,12 +45,12 @@ AddCSS("CreationE2EScreen", css`
     flex: 1;
   }
 
-  .creation-e2e-title-section {
+  .creation-e2e-screen > .title-section {
     margin-bottom: 1.5rem;
     text-align: center;
   }
 
-  .creation-e2e-title {
+  .creation-e2e-screen > .title-section > .title {
     font-size: 1.875rem;
     line-height: 2.25rem;
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -59,7 +58,7 @@ AddCSS("CreationE2EScreen", css`
     color: rgb(6, 78, 59);
   }
 
-  .creation-e2e-desc {
+  .creation-e2e-screen .desc {
     margin-top: 0.5rem;
     font-size: 0.875rem;
     line-height: 1.625;
@@ -67,7 +66,7 @@ AddCSS("CreationE2EScreen", css`
     font-style: italic;
   }
 
-  .creation-e2e-bom-box {
+  .creation-e2e-screen .bom-box {
     padding: 1rem;
     margin-bottom: 1.25rem;
     background-color: #F7F4EA;
@@ -76,7 +75,7 @@ AddCSS("CreationE2EScreen", css`
     border: 1px solid #EAE6E4;
   }
 
-  .creation-e2e-section-title {
+  .creation-e2e-screen .section-title {
     font-size: 1.5rem;
     line-height: 2rem;
     color: rgb(30, 41, 59);
@@ -84,26 +83,26 @@ AddCSS("CreationE2EScreen", css`
     margin-bottom: 1rem;
   }
 
-  .creation-e2e-bom {
+  .creation-e2e-screen .bom {
     font-size: 0.875rem;
     line-height: 1.625;
     color: rgb(30, 41, 59);
   }
 
-  .creation-e2e-bom ul {
+  .creation-e2e-screen .bom ul {
     list-style-type: disc;
     list-style-position: inside;
   }
 
-  .creation-e2e-bom ul li {
+  .creation-e2e-screen .bom ul li {
     margin-bottom: 0.25rem;
   }
 
-  .creation-e2e-steps{
+  .creation-e2e-screen .steps{
     margin-bottom: 1.25rem;
   }
 
-  .creation-e2e-steps ol {
+  .creation-e2e-screen .steps ol {
     margin-top: 0.75rem;
     list-style-type: decimal;
     list-style-position: inside;
@@ -112,29 +111,26 @@ AddCSS("CreationE2EScreen", css`
     color: rgb(30, 41, 59);
   }
 
-  .creation-e2e-steps ol li {
+  .creation-e2e-screen .steps ol li {
     margin-bottom: 0.25rem;
   }
 
-  .creation-e2e-notes {
+  .creation-e2e-screen .notes {
     margin-bottom: 1.5rem;
   }
 
-  .creation-e2e-notes p {
+  .creation-e2e-screen .notes p {
     margin-top: 0.75rem;
     font-size: 0.75rem;
     line-height: 1.625;
     color: rgb(51, 65, 85);
   }
 
-  .creation-e2e-actions-fixed {
+  .creation-e2e-screen .actions-fixed {
     position: fixed;
     bottom: 0;
   }
 `)
-
-
-
 
 export class CreationE2EScreen extends Screen {
   public static URL(a: CreationE2EScreen['a']) {
@@ -144,72 +140,73 @@ export class CreationE2EScreen extends Screen {
   declare public app: App
 
 
-  private creation!: Creation
-  private title!: Cash
-  private desc!: Cash
-  private heroImg!: Cash
   private bom!: Cash
-  private steps!: Cash
+  private creation!: Creation
+  private desc!: Cash
+  private foot!: Cash
+  private head!: Cash
+  private heroImg!: Cash
   private notes!: Cash
-  private makeFooter!: Cash
+  private steps!: Cash
+  private title!: Cash
 
   init(template: string, props: DonutProps, options: DonutOptions): Cash {
     // html annotation intentionally left out
     var template = html`
-    <div class="creation-e2e-screen">
-      <div class="creationHeader"></div>
+<div class="creation-e2e-screen">
+  <div class="head"></div>
 
-      <!-- Edge-to-edge hero image -->
-      <div class="creation-e2e-hero">
-        <img class="creation-e2e-hero-img" src="" alt="" />
+  <!-- Edge-to-edge hero image -->
+  <div class="hero">
+    <img class="hero-img" src="" alt="" />
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Title + Desc -->
+    <div class="title-section">
+      <h1 class="title"></h1>
+      <p class="desc"></p>
+    </div>
+
+    <!-- BOM -->
+    <div class="bom-box">
+      <h2 class="section-title">Ingredients</h2>
+      <div class="bom">
+        <ul class="bom-list"></ul>
       </div>
+    </div>
 
-      <!-- Content -->
-      <div class="creation-e2e-content">
+    <!-- Steps -->
+    <div class="steps">
+      <h2 class="section-title">Steps</h2>
+      <ol class="steps-list"></ol>
+    </div>
 
-        <!-- Title + Desc -->
-        <div class="creation-e2e-title-section">
-          <h1 class="creation-e2e-title"></h1>
-          <p class="creation-e2e-desc"></p>
-        </div>
+    <!-- Notes -->
+    <div class="notes">
+      <h2 class="section-title">Notes</h2>
+      <p class="notes-p"></p>
+    </div>
 
-        <!-- BOM -->
-        <div class="creation-e2e-bom-box">
-          <h2 class="creation-e2e-section-title">Ingredients</h2>
-          <div class="creation-e2e-bom">
-            <ul class="creation-e2e-bom-list"></ul>
-          </div>
-        </div>
+    <!-- Footer brand line -->
+    <div class="foot"></div>
+  </div>
 
-        <!-- Steps -->
-        <div class="creation-e2e-steps">
-          <h2 class="creation-e2e-section-title">Steps</h2>
-          <ol class="creation-e2e-steps-list"></ol>
-        </div>
-
-        <!-- Notes -->
-        <div class="creation-e2e-notes">
-          <h2 class="creation-e2e-section-title">Notes</h2>
-          <p class="creation-e2e-notes-p"></p>
-        </div>
-
-        <!-- Footer brand line -->
-        <div class="makeFooter"></div>
-      </div>
-
-      <div class='makeActions creation-e2e-actions-fixed'></div>
-    </div>`
+  <div class='actions'></div>
+</div>`
 
     super.init(template, {
-      creationHeader: [".creationHeader", CreationHead],
-      makeFooter: [".makeFooter", CreationFooter],
-      makeActions: [".makeActions", CreationActions],
-      title: ".creation-e2e-title",
-      desc: ".creation-e2e-desc",
-      heroImg: ".creation-e2e-hero-img",
-      bom: ".creation-e2e-bom-list",
-      steps: ".creation-e2e-steps-list",
-      notes: ".creation-e2e-notes-p"
+      head: [".head", ScreenHead],
+      foot: [".foot", CreationFoot],
+      actions: [".actions", CreationActions],
+      title: "creation-e2e-screen > .title",
+      desc: ".desc",
+      heroImg: ".hero-img",
+      bom: ".bom-list",
+      steps: ".steps-list",
+      notes: ".notes-p"
     }, options)
 
     return this.dobs

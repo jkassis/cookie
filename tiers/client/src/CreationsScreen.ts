@@ -3,7 +3,6 @@ import { App } from './Main.js'
 import { Cash } from 'cash-dom'
 import { Creation, Step, Ingredient } from './Schema.js'
 import { CreationBrief } from './CreationBrief.js'
-import { CreationHead } from './CreationHead.js'
 import { ScreenHead } from './ScreenHead.js'
 import { DonutProps, DonutOptions, html, css } from './satori/Donut.js'
 import { List } from './satori/List.js'
@@ -15,9 +14,13 @@ import { CreationE2EScreen } from './CreationE2EScreen.js'
 
 
 AddCSS("CreationsScreen", css`
-.creationsScreen .creationsScreenList {
+.creationsScreen {
   background-color: #f5f1ed;
+}
+
+.creationsScreen .creationsScreenList {
   width: 100%;
+  margin-top: 1rem;
 }
 
 .creationsScreen .creationsScreenList > * {
@@ -38,7 +41,6 @@ export class CreationsScreen extends Screen {
 
   private iList!: VIList<CreationBrief, CreationBrief['a'], Creation>
   private list!: List<CreationBrief, CreationBrief['a'], Creation>
-  private listHead!: CreationHead
   private screenHead!: ScreenHead
 
 
@@ -46,13 +48,11 @@ export class CreationsScreen extends Screen {
     var template = html`
 <div class='creationsScreen'>
   <div class='creationsScreenHead'></div>
-  <div class='creationsScreenListHead'></div>
   <div class='creationsScreenList'></div>
 </div>`
 
     super.init(template, {
       screenHead: ['.creationsScreenHead', ScreenHead],
-      listHead: ['.creationsScreenListHead', CreationHead],
       list: ['.creationsScreenList', List],
     }, options)
 

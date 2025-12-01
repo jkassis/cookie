@@ -2484,8 +2484,8 @@ var CreationActions = class extends Donut {
   }
 };
 
-// src/CreationFooter.ts
-AddCSS("CreationFooter", css`
+// src/CreationFoot.ts
+AddCSS("CreationFoot", css`
   .make-footer-container {
     margin-top: 1.5rem;
     border-top: 1px solid rgba(6, 78, 59, 0.1);
@@ -2500,7 +2500,7 @@ AddCSS("CreationFooter", css`
     text-transform: uppercase;
   }
 `);
-var CreationFooter = class extends Donut {
+var CreationFoot = class extends Donut {
   init(template, props, options) {
     template = html`
     <div>
@@ -2511,99 +2511,6 @@ var CreationFooter = class extends Donut {
         </p>
       </div>
     </div>`;
-    super.init(template, {}, options);
-    return this.dobs;
-  }
-};
-
-// src/CreationHead.ts
-AddCSS("CreationHead", css`
-  .make-head-container {
-    position: relative;
-    margin: 0.5rem;
-    text-align: center;
-    padding: 0.5rem;
-  }
-
-  .make-head-corner-tl {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1rem;
-    height: 1rem;
-    border-top: 2px solid rgba(6, 78, 59, 0.4);
-    border-left: 2px solid rgba(6, 78, 59, 0.4);
-  }
-
-  .make-head-corner-tr {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1rem;
-    height: 1rem;
-    border-top: 2px solid rgba(6, 78, 59, 0.4);
-    border-right: 2px solid rgba(6, 78, 59, 0.4);
-  }
-
-  .make-head-corner-bl {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 1rem;
-    height: 1rem;
-    border-bottom: 2px solid rgba(6, 78, 59, 0.4);
-    border-left: 2px solid rgba(6, 78, 59, 0.4);
-  }
-
-  .make-head-corner-br {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 1rem;
-    height: 1rem;
-    border-bottom: 2px solid rgba(6, 78, 59, 0.4);
-    border-right: 2px solid rgba(6, 78, 59, 0.4);
-  }
-
-  .make-head-title {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: rgba(6, 78, 59, 0.8);
-    text-transform: uppercase;
-  }
-
-  .make-head-subtitle {
-    margin-top: 0.25rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    color: rgba(6, 78, 59, 0.6);
-    text-transform: uppercase;
-  }
-`);
-var CreationHead = class extends Donut {
-  init(template, props, options) {
-    template = html`
-  <div class="make-head-container">
-    <!-- Corner decorations -->
-    <div class="make-head-corner-tl"></div>
-    <div class="make-head-corner-tr"></div>
-    <div class="make-head-corner-bl"></div>
-    <div class="make-head-corner-br"></div>
-
-    <!-- Side accent marks -->
-    <!--
-      <div class="absolute top-1/2 left-0 w-2 h-px bg-emerald-900/40 -translate-y-1/2"></div>
-      <div class="absolute top-1/2 right-0 w-2 h-px bg-emerald-900/40 -translate-y-1/2"></div>
-    -->
-
-    <p class="make-head-title">
-      FarmGoods Market
-    </p>
-    <p class="make-head-subtitle">
-      - Mocktail Series -
-    </p>
-  </div>`;
     super.init(template, {}, options);
     return this.dobs;
   }
@@ -3268,6 +3175,78 @@ var Screen = class extends Donut {
   }
 };
 
+// src/ScreenHead.ts
+AddCSS("ScreenHead", css`
+  .screenHead {
+    position: relative;
+    text-align: center;
+    padding: 0.5rem;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  .screenHead .site {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: rgba(6, 78, 59, 0.8);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .screenHead .subsite {
+    margin-top: 0.25rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: rgba(6, 78, 59, 0.6);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .screenHead .accountButton {
+    cursor: pointer;
+  }
+`);
+var ScreenHead = class extends Donut {
+  accountButton;
+  constructor() {
+    super();
+  }
+  init(template, props, options) {
+    var template = html`
+    <div class="screenHead">
+      <!-- Corner decorations -->
+      <!-- <div class="corner-tl"></div>
+              <div class="corner-tr"></div>
+              <div class="corner-bl"></div>
+              <div class="corner-br"></div> -->
+
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <div style="flex: 1; text-align: center;">
+          <p class="site">FarmGoods Market</p>
+          <p class="subsite">- Mocktail Series -</p>
+        </div>
+
+        <button type="submit" class="accountButton border-2 border-gray-200 flex w-9 h-9
+                    bg-transparent items-center justify-center rounded-lg p-2" style="flex-shrink: 0;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-200">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>`;
+    super.init(template, {
+      accountButton: ".accountButton"
+    }, options);
+    this.accountButton.on("click touch", (e) => this.app.auth.play());
+    this.dobs.on("click touch", (e) => this.app.router.playFwd("/"));
+    return this.dobs;
+  }
+};
+
 // src/CreationE2EScreen.ts
 AddCSS("CreationE2EScreen", css`
   .creation-e2e-screen {
@@ -3280,21 +3259,20 @@ AddCSS("CreationE2EScreen", css`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding-bottom: 5rem;
   }
 
-  .creation-e2e-hero {
+  .creation-e2e-screen .creation-e2e-hero {
     width: 100%;
     aspect-ratio: 4/3;
   }
 
-  .creation-e2e-hero img {
+ .creation-e2e-screen .hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .creation-e2e-content {
+  .creation-e2e-screen .content {
     padding: 1.25rem 1.5rem 1.5rem;
     max-width: 42rem;
     margin-left: auto;
@@ -3302,12 +3280,12 @@ AddCSS("CreationE2EScreen", css`
     flex: 1;
   }
 
-  .creation-e2e-title-section {
+  .creation-e2e-screen > .title-section {
     margin-bottom: 1.5rem;
     text-align: center;
   }
 
-  .creation-e2e-title {
+  .creation-e2e-screen > .title-section > .title {
     font-size: 1.875rem;
     line-height: 2.25rem;
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -3315,7 +3293,7 @@ AddCSS("CreationE2EScreen", css`
     color: rgb(6, 78, 59);
   }
 
-  .creation-e2e-desc {
+  .creation-e2e-screen .desc {
     margin-top: 0.5rem;
     font-size: 0.875rem;
     line-height: 1.625;
@@ -3323,7 +3301,7 @@ AddCSS("CreationE2EScreen", css`
     font-style: italic;
   }
 
-  .creation-e2e-bom-box {
+  .creation-e2e-screen .bom-box {
     padding: 1rem;
     margin-bottom: 1.25rem;
     background-color: #F7F4EA;
@@ -3332,7 +3310,7 @@ AddCSS("CreationE2EScreen", css`
     border: 1px solid #EAE6E4;
   }
 
-  .creation-e2e-section-title {
+  .creation-e2e-screen .section-title {
     font-size: 1.5rem;
     line-height: 2rem;
     color: rgb(30, 41, 59);
@@ -3340,26 +3318,26 @@ AddCSS("CreationE2EScreen", css`
     margin-bottom: 1rem;
   }
 
-  .creation-e2e-bom {
+  .creation-e2e-screen .bom {
     font-size: 0.875rem;
     line-height: 1.625;
     color: rgb(30, 41, 59);
   }
 
-  .creation-e2e-bom ul {
+  .creation-e2e-screen .bom ul {
     list-style-type: disc;
     list-style-position: inside;
   }
 
-  .creation-e2e-bom ul li {
+  .creation-e2e-screen .bom ul li {
     margin-bottom: 0.25rem;
   }
 
-  .creation-e2e-steps{
+  .creation-e2e-screen .steps{
     margin-bottom: 1.25rem;
   }
 
-  .creation-e2e-steps ol {
+  .creation-e2e-screen .steps ol {
     margin-top: 0.75rem;
     list-style-type: decimal;
     list-style-position: inside;
@@ -3368,22 +3346,22 @@ AddCSS("CreationE2EScreen", css`
     color: rgb(30, 41, 59);
   }
 
-  .creation-e2e-steps ol li {
+  .creation-e2e-screen .steps ol li {
     margin-bottom: 0.25rem;
   }
 
-  .creation-e2e-notes {
+  .creation-e2e-screen .notes {
     margin-bottom: 1.5rem;
   }
 
-  .creation-e2e-notes p {
+  .creation-e2e-screen .notes p {
     margin-top: 0.75rem;
     font-size: 0.75rem;
     line-height: 1.625;
     color: rgb(51, 65, 85);
   }
 
-  .creation-e2e-actions-fixed {
+  .creation-e2e-screen .actions-fixed {
     position: fixed;
     bottom: 0;
   }
@@ -3392,69 +3370,70 @@ var CreationE2EScreen = class extends Screen {
   static URL(a) {
     return `creation-e2e?${Router.aToURLParams(a)}`;
   }
-  creation;
-  title;
-  desc;
-  heroImg;
   bom;
-  steps;
+  creation;
+  desc;
+  foot;
+  head;
+  heroImg;
   notes;
-  makeFooter;
+  steps;
+  title;
   init(template, props, options) {
     var template = html`
-    <div class="creation-e2e-screen">
-      <div class="creationHeader"></div>
+<div class="creation-e2e-screen">
+  <div class="head"></div>
 
-      <!-- Edge-to-edge hero image -->
-      <div class="creation-e2e-hero">
-        <img class="creation-e2e-hero-img" src="" alt="" />
+  <!-- Edge-to-edge hero image -->
+  <div class="hero">
+    <img class="hero-img" src="" alt="" />
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Title + Desc -->
+    <div class="title-section">
+      <h1 class="title"></h1>
+      <p class="desc"></p>
+    </div>
+
+    <!-- BOM -->
+    <div class="bom-box">
+      <h2 class="section-title">Ingredients</h2>
+      <div class="bom">
+        <ul class="bom-list"></ul>
       </div>
+    </div>
 
-      <!-- Content -->
-      <div class="creation-e2e-content">
+    <!-- Steps -->
+    <div class="steps">
+      <h2 class="section-title">Steps</h2>
+      <ol class="steps-list"></ol>
+    </div>
 
-        <!-- Title + Desc -->
-        <div class="creation-e2e-title-section">
-          <h1 class="creation-e2e-title"></h1>
-          <p class="creation-e2e-desc"></p>
-        </div>
+    <!-- Notes -->
+    <div class="notes">
+      <h2 class="section-title">Notes</h2>
+      <p class="notes-p"></p>
+    </div>
 
-        <!-- BOM -->
-        <div class="creation-e2e-bom-box">
-          <h2 class="creation-e2e-section-title">Ingredients</h2>
-          <div class="creation-e2e-bom">
-            <ul class="creation-e2e-bom-list"></ul>
-          </div>
-        </div>
+    <!-- Footer brand line -->
+    <div class="foot"></div>
+  </div>
 
-        <!-- Steps -->
-        <div class="creation-e2e-steps">
-          <h2 class="creation-e2e-section-title">Steps</h2>
-          <ol class="creation-e2e-steps-list"></ol>
-        </div>
-
-        <!-- Notes -->
-        <div class="creation-e2e-notes">
-          <h2 class="creation-e2e-section-title">Notes</h2>
-          <p class="creation-e2e-notes-p"></p>
-        </div>
-
-        <!-- Footer brand line -->
-        <div class="makeFooter"></div>
-      </div>
-
-      <div class='makeActions creation-e2e-actions-fixed'></div>
-    </div>`;
+  <div class='actions'></div>
+</div>`;
     super.init(template, {
-      creationHeader: [".creationHeader", CreationHead],
-      makeFooter: [".makeFooter", CreationFooter],
-      makeActions: [".makeActions", CreationActions],
-      title: ".creation-e2e-title",
-      desc: ".creation-e2e-desc",
-      heroImg: ".creation-e2e-hero-img",
-      bom: ".creation-e2e-bom-list",
-      steps: ".creation-e2e-steps-list",
-      notes: ".creation-e2e-notes-p"
+      head: [".head", ScreenHead],
+      foot: [".foot", CreationFoot],
+      actions: [".actions", CreationActions],
+      title: "creation-e2e-screen > .title",
+      desc: ".desc",
+      heroImg: ".hero-img",
+      bom: ".bom-list",
+      steps: ".steps-list",
+      notes: ".notes-p"
     }, options);
     return this.dobs;
   }
@@ -3693,93 +3672,6 @@ var CreationBrief = class extends Donut {
   }
 };
 
-// src/ScreenHead.ts
-AddCSS("ScreenHead", css`
-  .menu-text-shadow {
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  @keyframes vCollapseAnim {
-    from {
-      max-height: 100px;
-      opacity: 1;
-    }
-    to {
-      max-height: 0px;
-      opacity: 0;
-    }
-  }
-
-  @keyframes vExpandAnim {
-    from {
-      max-height: 0px;
-      opacity: 0;
-    }
-    to {
-      max-height: 100px;
-      opacity: 1;
-    }
-  }
-
-  .vCollapseAnim {
-    animation: vCollapseAnim 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-  }
-
-  .vExpandAnim {
-    animation: vExpandAnim 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-  }`);
-var ScreenHead = class extends Donut {
-  accountButton;
-  loginButton;
-  signinButton;
-  constructor() {
-    super();
-  }
-  init(template, props, options) {
-    var template = html`
-<div class="menu w-full bg-blue-400 py-2 px-2 sm:py-4 sm:px-8 sm:rounded-b-2xl  ">
-  <div class="w-full mt-auto mr-auto mb-auto ml-auto grid grid-cols-[auto_1fr_auto]">
-    <!-- Brand vvv -->
-    <img src="./assets/brand-5.png" class="brand cursor-pointer max-w-[50px]" />
-
-    <!-- Account Buttons vvv -->
-    <div class="items-center flex">
-      <button fontfamily="Arial" type="submit"
-        class="accountButton border-2 border-gray-200 flex w-full h-9 text-gray-200
-                            bg-transparent items-center justify-center text-center rounded-lg text-lg font-normal px-3">
-        Account</button>
-      <button fontfamily="Arial" type="submit"
-        class="signinButton border-2 border-gray-200 flex w-full h-9 text-gray-200
-                            bg-transparent items-center justify-center text-center rounded-lg text-lg font-normal px-3">Sign&nbsp;in</button>
-      <button fontfamily="Arial" type="submit" class="loginButton hover:bg-blue-900 hover:border-blue-900 border-2 flex
-                            border-blue-700 w-full h-9 text-white bg-blue-700 items-center justify-center text-center rounded-lg
-                            text-lg font-normal px-3">New&nbsp;Patient</button>
-    </div>
-  </div>
-</div>`;
-    super.init(template, {
-      accountButton: ".accountButton",
-      brand: ".brand",
-      loginButton: ".loginButton",
-      signinButton: ".signinButton"
-    }, options);
-    this.loginButton.on("click touch", (e) => this.app.auth.play());
-    this.signinButton.on("click touch", (e) => this.app.auth.play());
-    return this.dobs;
-  }
-  render() {
-    if (this.app.auth?.profile) {
-      this.accountButton.show();
-      this.loginButton.hide();
-      this.signinButton.hide();
-    } else {
-      this.accountButton.hide();
-      this.loginButton.show();
-      this.signinButton.show();
-    }
-  }
-};
-
 // src/satori/List.ts
 var List = class extends Donut {
   itemDonuts;
@@ -3898,9 +3790,13 @@ var VIList = class {
 
 // src/CreationsScreen.ts
 AddCSS("CreationsScreen", css`
-.creationsScreen .creationsScreenList {
+.creationsScreen {
   background-color: #f5f1ed;
+}
+
+.creationsScreen .creationsScreenList {
   width: 100%;
+  margin-top: 1rem;
 }
 
 .creationsScreen .creationsScreenList > * {
@@ -3917,18 +3813,15 @@ var CreationsScreen = class extends Screen {
   }
   iList;
   list;
-  listHead;
   screenHead;
   init(template, props, options) {
     var template = html`
 <div class='creationsScreen'>
   <div class='creationsScreenHead'></div>
-  <div class='creationsScreenListHead'></div>
   <div class='creationsScreenList'></div>
 </div>`;
     super.init(template, {
       screenHead: [".creationsScreenHead", ScreenHead],
-      listHead: [".creationsScreenListHead", CreationHead],
       list: [".creationsScreenList", List]
     }, options);
     this.list.a = {
