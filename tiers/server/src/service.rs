@@ -88,7 +88,10 @@ async fn static_file_handler(
 }
 
 async fn spa_fallback_handler() -> impl IntoResponse {
-  let content = std::fs::read_to_string("../client/bundle/Main.html")
+  let bundle_dir = std::env::var("BUNDLE_DIR")
+    .unwrap_or_else(|_| "../client/bundle".to_string());
+  let main_html_path = format!("{}/Main.html", bundle_dir);
+  let content = std::fs::read_to_string(&main_html_path)
     .unwrap_or_else(|_| "<h1>Main.html not found</h1>".to_string());
   let mut headers = HeaderMap::new();
   headers.insert(header::CONTENT_TYPE, "text/html".parse().unwrap());

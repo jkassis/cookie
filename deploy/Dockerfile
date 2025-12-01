@@ -53,6 +53,7 @@ ENV CERT_DIR "/etc/app/conf/tls"
 
 # Copy static assets
 COPY tiers/client/bundle/ /usr/local/bin/client/bundle/
+ENV BUNDLE_DIR "/usr/local/bin/client/bundle"
 COPY tiers/client/assets/ /usr/local/bin/client/assets/
 ENV ASSETS_DIR "/usr/local/bin/client/assets"
 
