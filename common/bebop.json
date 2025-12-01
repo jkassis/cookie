@@ -1,0 +1,8 @@
+{
+  "include": ["schema/*.bop"],
+  "generators": {
+    "ts": {
+      "outFile": "typescript/src/msg.ts"
+    }
+  }
+}
