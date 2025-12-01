@@ -1,1 +1,0 @@
-cargo:rustc-env=MIME_TYPES_GENERATED_PATH=/Users/jkassis/Code/cookie/server/target/debug/build/mime_guess-75ca5f40bad1cd25/out/mime_types_generated.rs

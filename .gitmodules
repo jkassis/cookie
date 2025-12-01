@@ -1,6 +1,6 @@
-[submodule "client/src/satori"]
-	path = client/src/satori
+[submodule "tiers/client/src/satori"]
+	path = tiers/client/src/satori
 	url = git@github.com:jkassis/satori.git
-[submodule "server/src/rustie"]
-	path = server/src/rustie
+[submodule "tiers/server/src/rustie"]
+	path = tiers/server/src/rustie
 	url = git@github.com:jkassis/rustie.git
