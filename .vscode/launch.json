@@ -28,7 +28,11 @@
       "type": "node-terminal",
       "request": "launch",
       "command": "${workspaceFolder}/deploy/cloud.sh",
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}",
+      "presentation": {
+        "close": true,
+        "reveal": "silent"
+      }
     },
     {
       "name": "Server",
