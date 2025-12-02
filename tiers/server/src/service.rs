@@ -5,7 +5,7 @@ use axum::{
   http::{header, HeaderMap, Method, StatusCode},
   middleware,
   response::{IntoResponse, Response},
-  routing::get,
+  routing::{get, post},
   Router,
 };
 use std::sync::Arc;
@@ -35,6 +35,7 @@ impl Service {
     let router = Router::new()
       .nest_service("/assets", ServeDir::new(assets_dir))
       .route("/{file}", get(static_file_handler))
+      .route("/tx/do", post(tx_do_handler))
       .fallback(spa_fallback_handler);
 
     // Use custom CORS middleware instead of tower-http CorsLayer so we can
@@ -44,6 +45,13 @@ impl Service {
 
     router.layer(cors_layer)
   }
+}
+
+// TxDo handler - reads POST body
+async fn tx_do_handler(body: String) -> impl IntoResponse {
+  let req = body;
+  // Process req here
+  (StatusCode::OK, format!("Received: {}", req))
 }
 
 // Static file handler for Axum

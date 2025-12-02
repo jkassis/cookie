@@ -3,6 +3,7 @@ import { AddCSS, Loader } from './Loader.js'
 import { App } from './Main.js'
 import { Cash } from 'cash-dom'
 import { Donut, DonutProps, DonutOptions, html, css } from './satori/Donut.js'
+import { dao } from './DAO.js'
 
 AddCSS("ScreenHead", css`
   .screenHead {
@@ -52,9 +53,9 @@ export class ScreenHead extends Donut {
     <div class="screenHead">
       <!-- Corner decorations -->
       <!-- <div class="corner-tl"></div>
-              <div class="corner-tr"></div>
-              <div class="corner-bl"></div>
-              <div class="corner-br"></div> -->
+                          <div class="corner-tr"></div>
+                          <div class="corner-bl"></div>
+                          <div class="corner-br"></div> -->
 
       <div style="display: flex; align-items: center; justify-content: center;">
         <div style="flex: 1; text-align: center;">
@@ -63,7 +64,7 @@ export class ScreenHead extends Donut {
         </div>
 
         <button type="submit" class="accountButton border-2 border-gray-200 flex w-9 h-9
-                    bg-transparent items-center justify-center rounded-lg p-2" style="flex-shrink: 0;">
+                                bg-transparent items-center justify-center rounded-lg p-2" style="flex-shrink: 0;">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-200">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -77,8 +78,13 @@ export class ScreenHead extends Donut {
     }, options)
 
 
-    this.accountButton.on('click touch', e => this.app.auth!.play()) // This one directly triggers login
+    this.accountButton.on('click touch', e => this.accountButtonPlay()) // This one directly triggers login
     this.dobs.on('click touch', e => this.app.router.playFwd("/"))
     return this.dobs
+  }
+  async accountButtonPlay() {
+    // this.app.auth!.play()
+    let response = await dao.TxDO({})
+    alert(response)
   }
 }

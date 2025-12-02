@@ -2178,6 +2178,25 @@ var DAO = class {
   async CreationGetByID(id) {
     return creations[id];
   }
+  async post(url, payload) {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/octet-stream"
+      },
+      body: payload
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      return response.blob();
+    }
+  }
+  async TxDO(tx) {
+    let payload = JSON.stringify(tx);
+    let response = await this.post("/tx/do", payload);
+    return response.text();
+  }
   async CreationsGet(pageSize, pageNum) {
     const allCreations = Object.values(creations);
     const start = pageNum * pageSize;
@@ -3218,9 +3237,9 @@ var ScreenHead = class extends Donut {
     <div class="screenHead">
       <!-- Corner decorations -->
       <!-- <div class="corner-tl"></div>
-              <div class="corner-tr"></div>
-              <div class="corner-bl"></div>
-              <div class="corner-br"></div> -->
+                          <div class="corner-tr"></div>
+                          <div class="corner-bl"></div>
+                          <div class="corner-br"></div> -->
 
       <div style="display: flex; align-items: center; justify-content: center;">
         <div style="flex: 1; text-align: center;">
@@ -3229,7 +3248,7 @@ var ScreenHead = class extends Donut {
         </div>
 
         <button type="submit" class="accountButton border-2 border-gray-200 flex w-9 h-9
-                    bg-transparent items-center justify-center rounded-lg p-2" style="flex-shrink: 0;">
+                                bg-transparent items-center justify-center rounded-lg p-2" style="flex-shrink: 0;">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-200">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -3241,9 +3260,13 @@ var ScreenHead = class extends Donut {
     super.init(template, {
       accountButton: ".accountButton"
     }, options);
-    this.accountButton.on("click touch", (e) => this.app.auth.play());
+    this.accountButton.on("click touch", (e) => this.accountButtonPlay());
     this.dobs.on("click touch", (e) => this.app.router.playFwd("/"));
     return this.dobs;
+  }
+  async accountButtonPlay() {
+    let response = await dao.TxDO({});
+    alert(response);
   }
 };
 

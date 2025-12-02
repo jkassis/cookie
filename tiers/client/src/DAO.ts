@@ -280,6 +280,29 @@ class DAO {
   async CreationGetByID(id: string): Promise<Creation | undefined> {
     return creations[id]
   }
+
+  async post(url: string, payload: string): Promise<Blob> {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/octet-stream',
+      },
+      body: payload
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    } else {
+      return response.blob()
+    }
+  }
+
+  async TxDO(tx: object): Promise<string> {
+    let payload = JSON.stringify(tx)
+    let response = await this.post('/tx/do', payload)
+    return response.text()
+  }
+
   async CreationsGet(pageSize: number, pageNum: number): Promise<Creation[]> {
     const allCreations = Object.values(creations)
     const start = pageNum * pageSize
