@@ -11,17 +11,48 @@ use axum::{
 use std::sync::Arc;
 use tower_http::services::ServeDir;
 
+use crate::rustie::db::kv::KvStore;
+use crate::rustie::db::kv_redb::RedbStore;
+use crate::rustie::db::kv_tikv::TiKvTransactionalStore;
+
 // Custom rejection for unauthorized
 #[allow(dead_code)]
 #[derive(Debug)]
 struct Unauthorized;
 
-#[derive(Debug)]
-pub struct Service {}
+pub struct Service {
+  db: Arc<dyn KvStore>,
+}
 
 impl Service {
-  pub fn new() -> Self {
-    Self {}
+  pub async fn new() -> Self {
+    let app_mode =
+      std::env::var("APP_MODE").unwrap_or_else(|_| "dev".to_string());
+
+    let db: Arc<dyn KvStore> = if app_mode == "prod" {
+      // Production: use TiKV
+      let pd_endpoints = std::env::var("TIKV_PD_ENDPOINTS")
+        .unwrap_or_else(|_| "127.0.0.1:2379".to_string())
+        .split(',')
+        .map(|s| s.to_string())
+        .collect();
+
+      let store = TiKvTransactionalStore::new(pd_endpoints)
+        .await
+        .expect("Failed to connect to TiKV");
+
+      Arc::new(store)
+    } else {
+      // Development: use embedded redb
+      let db_path = std::env::var("REDB_PATH")
+        .unwrap_or_else(|_| "./data/redb.db".to_string());
+
+      let store = RedbStore::new(&db_path).expect("Failed to initialize redb");
+
+      Arc::new(store)
+    };
+
+    Self { db }
   }
 
   pub fn routes(self: Arc<Self>) -> Router {

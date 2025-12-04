@@ -1,4 +1,5 @@
 mod rustie {
+  pub mod db;
   pub mod http;
 }
 mod service;
@@ -15,7 +16,7 @@ async fn main() {
   println!("Main called, PID: {}", std::process::id());
 
   // Create service instance wrapped in Arc for sharing
-  let service = Arc::new(service::Service::new());
+  let service = Arc::new(service::Service::new().await);
 
   // Use original service for web routes
   let service_routes = service.routes();
